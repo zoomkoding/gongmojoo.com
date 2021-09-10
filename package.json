@@ -17,6 +17,8 @@
     "@types/react": "17.0.20",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "postcss": "^8.2.15",
+    "sass": "^1.39.2",
     "typescript": "4.4.2"
   }
 }
