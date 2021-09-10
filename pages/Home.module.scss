@@ -1,0 +1,40 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.title {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 66px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: rgb(0, 0, 0);
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  line-height: 1.5;
+  font-size: 45px;
+  font-weight: 600;
+  color: #1e63ff;
+}
