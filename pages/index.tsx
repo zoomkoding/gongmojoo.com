@@ -14,12 +14,16 @@ const Home: NextPage = () => {
 
       <main className={classes.main}>
         <PageHeader />
-        <h1 className={classes.title}>
-          공모주의 모든 것<br />
-          따상에서 쉽고 간편하게
+        <h1 className={classes.introduction}>
+          <div>공모주의 모든 것</div>
+          <div className={classes.secondLine}>
+            <p>따상에서 </p>
+            <p className={classes.space}>&nbsp;</p>
+            <p>쉽고 간편하게</p>
+          </div>
         </h1>
 
-        <p className={classes.description}>10월 중 서비스 예정!</p>
+        <p className={classes.promotion}>10월 중 서비스 예정!</p>
       </main>
     </div>
   );

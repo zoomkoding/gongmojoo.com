@@ -1,3 +1,5 @@
+@use '@/styles/mixins'as *;
+
 .header {
     position: fixed;
     display: flex;
@@ -59,5 +61,44 @@
 
     a:hover {
         background-color: rgba(2, 32, 71, .05);
+    }
+}
+
+.showMenuButton {
+    display: none;
+}
+
+.showMenus {
+    display: none;
+}
+
+@include smaller-than(700px) {
+    .header {
+        padding: 0 24px;
+    }
+
+    .menus {
+        display: none;
+    }
+
+    .showMenuButton {
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .showMenus {
+        position: fixed;
+        left: 0;
+        top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+
+        .menu {
+            padding: 1px 18px;
+        }
     }
 }

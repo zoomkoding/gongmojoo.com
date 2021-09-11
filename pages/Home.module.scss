@@ -1,3 +1,5 @@
+@use '@/styles/mixins'as *;
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -18,23 +20,46 @@
 }
 
 
-.title {
+.introduction {
   text-align: center;
   margin-bottom: 50px;
   font-size: 66px;
   font-weight: 700;
   line-height: 1.4;
   color: rgb(0, 0, 0);
+
+  .secondLine {
+    display: flex;
+  }
 }
 
-.title,
-.description {
+.introduction,
+.promotion {
   text-align: center;
 }
 
-.description {
+.promotion {
   line-height: 1.5;
   font-size: 45px;
   font-weight: 600;
   color: #1e63ff;
+}
+
+@include smaller-than(700px) {
+  .introduction {
+    font-size: 35px;
+
+    .secondLine {
+      flex-direction: column;
+      line-height: 1.5;
+
+      .space {
+        display: none;
+      }
+    }
+  }
+
+  .promotion {
+    font-size: 25px;
+  }
 }
