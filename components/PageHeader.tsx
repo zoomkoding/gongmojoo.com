@@ -4,7 +4,7 @@ function PageHeader() {
   return (
     <header className={classes.header}>
       <div className={classes.headerContent}>
-        <div className={classes.logo}>모두를 위한 공모주</div>
+        <div className={classes.logo}>따상</div>
         <div className={classes.menus}>
           <div className={classes.menu}>
             <a>공모주란</a>

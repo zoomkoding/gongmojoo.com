@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <div className={classes.container}>
       <Head>
-        <title>공모주닷컴</title>
+        <title>따상 | 공모주의 모든 것</title>
         <meta name="description" content="공모주에 대한 모든 것" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <PageHeader />
         <h1 className={classes.title}>
           공모주의 모든 것<br />
-          이곳에서 쉽고 간편하게
+          따상에서 쉽고 간편하게
         </h1>
 
         <p className={classes.description}>10월 중 서비스 예정!</p>
