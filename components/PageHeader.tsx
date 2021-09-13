@@ -1,38 +1,53 @@
 import classNames from "classnames";
-import { Bars } from "framework7-icons-plus/react";
-import { useState } from "react";
+import { Bars, Multiply } from "framework7-icons-plus/react";
+import Link from "next/link";
+import React, { useState } from "react";
 import classes from "./PageHeader.module.scss";
 
 function PageHeader() {
+  //🚀🔺🧨💸💥🤑
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   return (
-    <header className={classes.header}>
+    <header
+      className={classNames({
+        [classes.header]: true,
+        [classes.showMenus]: isMenuOpened,
+      })}
+    >
       <div className={classes.headerContent}>
-        <div className={classes.logo}>따상</div>
+        <Link href="/" passHref>
+          <div className={classes.logo}>
+            <p className={classes.icon}>🤑</p> 따상
+          </div>
+        </Link>
+
         <div
           className={classes.showMenuButton}
           onClick={() => setIsMenuOpened((value) => !value)}
         >
-          <Bars />
+          {isMenuOpened ? <Multiply /> : <Bars />}
         </div>
 
-        <div
-          className={classNames({
-            [classes.menus]: true,
-            [classes.showMenus]: isMenuOpened,
-          })}
-        >
+        <div className={classes.menus}>
           <div className={classes.menu}>
-            <a>공모주란</a>
+            <Link href="/about" passHref>
+              <a>공모주 따상이란</a>
+            </Link>
           </div>
           <div className={classes.menu}>
-            <a>진행중인 공모주</a>
+            <Link href="/live" passHref>
+              <a>진행중인 공모주</a>
+            </Link>
           </div>
           <div className={classes.menu}>
-            <a>공모주 캘린더</a>
+            <Link href="/live" passHref>
+              <a>공모주 캘린더</a>
+            </Link>
           </div>
           <div className={classes.menu}>
-            <a>계좌 개설 정보</a>
+            <Link href="/strategy" passHref>
+              <a>계좌 개설 정보</a>
+            </Link>
           </div>
           <div className={classes.menu}>
             <a>피드백 남기기</a>

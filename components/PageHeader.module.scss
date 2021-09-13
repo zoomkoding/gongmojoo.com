@@ -14,19 +14,23 @@
 
 .headerContent {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     max-width: 1140px;
     width: 100%;
-    justify-content: space-between;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    line-height: 100%;
-    font-size: 21px;
-    font-weight: 700;
-    text-align: center;
+    margin-left: 4px;
+    font-size: 20px;
+    font-weight: 600;
+}
 
+.icon {
+    margin-right: 5px;
+    font-size: 25px;
 }
 
 .description {
@@ -38,7 +42,6 @@
 }
 
 .menu {
-    height: 100%;
     list-style: none;
     display: flex;
     align-items: center;
@@ -49,7 +52,7 @@
     a {
         padding: 12px 10px;
         font-size: 17px;
-        line-height: 20px;
+        line-height: 100%;
         color: #4e5968;
         border-radius: 8px;
         border: 0;
@@ -68,37 +71,57 @@
     display: none;
 }
 
-.showMenus {
-    display: none;
-}
-
-@include smaller-than(700px) {
+@include smaller-than(850px) {
     .header {
-        padding: 0 24px;
+        padding-left: 20px;
+        padding-right: 15px;
+        border-bottom: 1px solid #e7e7e7;
+
     }
 
     .menus {
+        position: fixed;
         display: none;
+        flex-direction: column;
+        left: 0;
+        top: 60px;
+        width: 100%;
     }
 
     .showMenuButton {
         display: flex;
         align-items: center;
         font-size: 30px;
+        color: rgb(176, 184, 193);
         cursor: pointer;
     }
 
+
+
     .showMenus {
-        position: fixed;
-        left: 0;
-        top: 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 100%;
+        border-bottom: 1px solid white;
+
+        .menus {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #e7e7e7;
+            box-shadow: 1px 4px 8px rgb(0 0 0 / 10%);
+            background-color: white;
+        }
 
         .menu {
-            padding: 1px 18px;
+            display: flex;
+            width: 100%;
+            font-size: 15px;
+            padding: 1px 12px;
+            margin-left: auto;
+
+
+            a {
+                padding: 10px;
+            }
         }
+
+
     }
 }
