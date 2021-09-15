@@ -15,6 +15,10 @@ function DefaultPageLayout({ children }: IDefaultPageLayoutProps) {
           name="google-site-verification"
           content="c0gtAYO2TBUvjFC3scycauGVmPPzOmd96LC6RIbKIiQ"
         />
+        <meta
+          name="naver-site-verification"
+          content="2c6fed5ef526d9f24df3612f630251ef56e9a1fd"
+        />
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-G8M1X540VP"
