@@ -122,8 +122,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
                   <div className={classes.securityName}>{item.증권사이름}</div>
                   <div className={classes.rate}>{item.비례경쟁률}:1</div>
                   <div className={classes.rate}>
-                    {numberWithCommas(stock.확정공모가 * 0.5 * item.비례경쟁률)}
-                    원
+                    {numberWithCommas(stock.확정공모가 * item.비례경쟁률)}원
                   </div>
                   {/* <div className={classes.rate}>{item.총청약건수}</div> */}
                 </div>
