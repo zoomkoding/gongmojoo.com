@@ -35,6 +35,11 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
 
   return (
     <DefaultPageLayout>
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2827068140840250"
+        crossOrigin="anonymous"
+      ></script>
       <Head>
         <title>{stock.종목이름} 증권사별 실시간 청약 경쟁률 - 따상</title>
         <meta

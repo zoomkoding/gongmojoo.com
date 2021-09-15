@@ -11,9 +11,10 @@ function DefaultPageLayout({ children }: IDefaultPageLayoutProps) {
   return (
     <div className={classes.defaultPageLayout}>
       <Head>
-        <title>따상 | 공모주의 모든 것</title>
-        <meta name="description" content="공모주에 대한 모든 것" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="google-site-verification"
+          content="c0gtAYO2TBUvjFC3scycauGVmPPzOmd96LC6RIbKIiQ"
+        />
       </Head>
       <PageHeader />
       <main className={classes.main}>{children}</main>
