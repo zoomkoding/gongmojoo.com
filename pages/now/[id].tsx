@@ -143,7 +143,7 @@ export const getServerSideProps: GetServerSideProps<ILiveDetailPageProps> =
       return { props: {} };
     }
     const res = await fetch(
-      `http://localhost:3000/api/stock/${context.params.id}`
+      `http://3.35.66.51:4000/api/stock/${context.params.id}`
     );
     if (res.status >= 400) return { props: {} };
     const stock: 공모주 = await res.json();
