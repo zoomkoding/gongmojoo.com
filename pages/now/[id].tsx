@@ -2,6 +2,7 @@ import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import { 공모주 } from "@/types";
 import classNames from "classnames";
 import { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
 import React from "react";
 import classes from "./LiveDetail.module.scss";
 
@@ -34,6 +35,24 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
 
   return (
     <DefaultPageLayout>
+      <Head>
+        <title>{stock.종목이름} 증권사별 실시간 청약 경쟁률 - 따상</title>
+        <meta
+          property="description"
+          content={`따상 - ${stock.종목이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
+        />
+        <meta
+          property="og:title"
+          content={`${stock.종목이름} 증권사별 실시간 청약 경쟁률 - 따상`}
+          data-react-helmet="true"
+        />
+        <meta
+          property="og:description"
+          content={`따상 - ${stock.종목이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
+        />
+        <meta property="og:type" content="website" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={classes.liveDetailPage}>
         <div className={classes.pageContent}>
           <div className={classes.pageName}>
