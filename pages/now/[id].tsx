@@ -115,7 +115,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
               >
                 <div className={classes.securityName}>증권사</div>
                 <div className={classes.rate}>비례경쟁률</div>
-                <div className={classes.rate}>1주당 필요증거금</div>
+                <div className={classes.rate}>1주당필요증거금</div>
               </div>
               {stock.주간사경쟁률.map((item) => (
                 <div className={classes.securityInfoItem} key={item.증권사이름}>

@@ -136,21 +136,21 @@
   height: 17px;
   font-size: 14px;
   font-weight: 400;
-  font-size: 15px;
+
 }
 
 .securityName {
-  flex: 2;
+  flex: 3;
 }
 
 .rate {
-  flex: 3;
+  flex: 4;
   text-align: center;
 }
 
 .tableHeader {
   padding-top: 5px;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
   font-weight: 700;
 }
 
@@ -168,5 +168,24 @@
 @include larger-than(700px) {
   .section {
     max-width: 540px;
+  }
+
+  .securityInfoItem {
+    font-size: 15px;
+  }
+
+  .securityName {
+    flex: 2;
+  }
+
+  .rate {
+    flex: 3;
+    text-align: center;
+  }
+
+  .tableHeader {
+    padding-top: 5px;
+    padding-bottom: 25px;
+    font-weight: 700;
   }
 }
