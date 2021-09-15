@@ -1,23 +1,35 @@
-import { 현재진행중인공모주 } from "@/dummy/공모주";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
+import { 공모주 } from "@/types";
 import classNames from "classnames";
-import { ChevronRight, QuestionCircle } from "framework7-icons-plus/react";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
+import { GetServerSideProps, NextPage } from "next";
+import React from "react";
 import classes from "./LiveDetail.module.scss";
 
-const LiveDetail: NextPage = () => {
-  const router = useRouter();
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
-  const currentStock = useMemo(
-    () =>
-      현재진행중인공모주.find(({ 종목이름 }) => router.query.name === 종목이름),
-    [router.query.name]
-  );
+export interface ILiveDetailPageProps {
+  stock?: 공모주;
+}
 
-  if (!currentStock) {
-    return <></>;
+function numberWithCommas(x: number) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getCurrentTime(x: string) {
+  return new Date(x).toLocaleTimeString("kr", {
+    month: "narrow",
+    day: "2-digit",
+  });
+}
+
+const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
+  if (!stock) {
+    return (
+      <DefaultPageLayout>
+        <div className={classes.notFound}>
+          해당 페이지가
+          <br /> 존재하지 않습니다.
+        </div>
+      </DefaultPageLayout>
+    );
   }
 
   return (
@@ -26,52 +38,48 @@ const LiveDetail: NextPage = () => {
         <div className={classes.pageContent}>
           <div className={classes.pageName}>
             공모주 실시간 경쟁률
-            <QuestionCircle />
+            {/* <QuestionCircle /> */}
           </div>
 
-          {/* <div className={classes.pageDescription}>
-          현재 경쟁률을 기반으로 배당 받을 수 있는 수량을 확인합니다.
-        </div> */}
-          <div className={classNames([classes.section, classes.white])}>
+          <div className={classes.section}>
             <div className={classes.sectionContent}>
               <div className={classes.sectionHeader}>종목 정보</div>
-              <div className={classes.stockName}>{currentStock.종목이름}</div>
-              <div className={classes.stockDescription}>
-                {currentStock.업종}
-              </div>
+              <div className={classes.stockName}>{stock.종목이름}</div>
+              <div className={classes.stockDescription}>{stock.업종}</div>
               <div className={classes.stockDetails}>
                 <div className={classes.stockInfoItem}>
                   <div className={classes.stockInfoLabel}>확정공모가</div>
                   <div className={classes.stockInfoValue}>
-                    {currentStock.확정공모가}원
+                    {stock.확정공모가}원
                   </div>
                 </div>
                 <div className={classes.stockInfoItem}>
                   <div className={classes.stockInfoLabel}>기관경쟁률</div>
                   <div className={classes.stockInfoValue}>
-                    {currentStock.기관경쟁률}:1
+                    {stock.기관경쟁률}:1
                   </div>
                 </div>
                 <div className={classes.stockInfoItem}>
                   <div className={classes.stockInfoLabel}>의무보유확약</div>
                   <div className={classes.stockInfoValue}>
-                    {currentStock.총의무보유확약비율}%
+                    {stock.총의무보유확약비율}%
                   </div>
                 </div>
               </div>
-
-              <div className={classes.moreInfoButton}>
+              {/* <div className={classes.moreInfoButton}>
                 <div className={classes.button}>
                   더보기 <ChevronRight />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
           <div className={classes.section}>
             <div className={classes.sectionHeader}>
               실시간 경쟁률
-              <div className={classes.lastUpdatedTime}>오늘 18:37 기준</div>
+              <div className={classes.lastUpdatedTime}>
+                {getCurrentTime(stock.주간사경쟁률[0].updatedAt)} 기준
+              </div>
             </div>
 
             <div className={classes.securityInfoItems}>
@@ -83,13 +91,17 @@ const LiveDetail: NextPage = () => {
               >
                 <div className={classes.securityName}>증권사</div>
                 <div className={classes.rate}>비례경쟁률</div>
-                <div className={classes.rate}>균등경쟁률</div>
+                <div className={classes.rate}>1주당 필요증거금</div>
               </div>
-              {currentStock.주간사경쟁률.map((item) => (
+              {stock.주간사경쟁률.map((item) => (
                 <div className={classes.securityInfoItem} key={item.증권사이름}>
                   <div className={classes.securityName}>{item.증권사이름}</div>
-                  <div className={classes.rate}>{item.일반비례경쟁률}:1</div>
-                  <div className={classes.rate}>404.29:1</div>
+                  <div className={classes.rate}>{item.비례경쟁률}:1</div>
+                  <div className={classes.rate}>
+                    {numberWithCommas(stock.확정공모가 * 0.5 * item.비례경쟁률)}
+                    원
+                  </div>
+                  {/* <div className={classes.rate}>{item.총청약건수}</div> */}
                 </div>
               ))}
             </div>
@@ -99,5 +111,22 @@ const LiveDetail: NextPage = () => {
     </DefaultPageLayout>
   );
 };
+
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps<ILiveDetailPageProps> =
+  async (context) => {
+    if (!context.params?.id) {
+      return { props: {} };
+    }
+    const res = await fetch(
+      `http://localhost:3000/api/stock/${context.params.id}`
+    );
+    if (res.status >= 400) return { props: {} };
+    const stock: 공모주 = await res.json();
+
+    return {
+      props: { stock },
+    };
+  };
 
 export default LiveDetail;

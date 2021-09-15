@@ -14,7 +14,7 @@ const Home: NextPage = () => {
             <p>쉽고 간편하게</p>
           </div>
         </h1>
-        <p className={classes.promotion}>10월 중 서비스 예정!</p>
+        <p className={classes.promotion}>10월 중 본격 서비스 예정!</p>
       </div>
     </DefaultPageLayout>
   );
