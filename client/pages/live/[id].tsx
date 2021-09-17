@@ -1,5 +1,5 @@
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
-import { 공모주 } from "@/types";
+import { IStock, IStockSecurity } from "@@/types";
 import classNames from "classnames";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
@@ -7,11 +7,17 @@ import React from "react";
 import classes from "./LiveDetail.module.scss";
 
 export interface ILiveDetailPageProps {
-  stock?: 공모주;
+  stock?: IStock;
 }
 
 function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
+  if (!stock.확정공모가) return 0;
+  const 공모가기준증거금 = stock.확정공모가 * stock.증거금비율 * 0.01;
+  return numberWithCommas(공모가기준증거금 * security.비례경쟁률);
 }
 
 function getCurrentTime(x: string) {
@@ -41,19 +47,19 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
         crossOrigin="anonymous"
       ></script>
       <Head>
-        <title>{stock.종목이름} 증권사별 실시간 청약 경쟁률 - 따상</title>
+        <title>{stock.이름} 증권사별 실시간 청약 경쟁률 - 따상</title>
         <meta
           property="description"
-          content={`따상 - ${stock.종목이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
+          content={`따상 - ${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
         />
         <meta
           property="og:title"
-          content={`${stock.종목이름} 증권사별 실시간 청약 경쟁률 - 따상`}
+          content={`${stock.이름} 증권사별 실시간 청약 경쟁률 - 따상`}
           data-react-helmet="true"
         />
         <meta
           property="og:description"
-          content={`따상 - ${stock.종목이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
+          content={`따상 - ${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
         />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
@@ -64,11 +70,10 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
             공모주 실시간 경쟁률
             {/* <QuestionCircle /> */}
           </div>
-
           <div className={classes.section}>
             <div className={classes.sectionContent}>
               <div className={classes.sectionHeader}>종목 정보</div>
-              <div className={classes.stockName}>{stock.종목이름}</div>
+              <div className={classes.stockName}>{stock.이름}</div>
               <div className={classes.stockDescription}>{stock.업종}</div>
               <div className={classes.stockDetails}>
                 <div className={classes.stockInfoItem}>
@@ -102,7 +107,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
             <div className={classes.sectionHeader}>
               실시간 경쟁률
               <div className={classes.lastUpdatedTime}>
-                {getCurrentTime(stock.주간사경쟁률[0].updatedAt)} 기준
+                {getCurrentTime(stock.주간사[0].updatedAt)} 기준
               </div>
             </div>
 
@@ -117,12 +122,12 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
                 <div className={classes.rate}>비례경쟁률</div>
                 <div className={classes.rate}>1주당필요증거금</div>
               </div>
-              {stock.주간사경쟁률.map((item) => (
-                <div className={classes.securityInfoItem} key={item.증권사이름}>
+              {stock.주간사.map((item) => (
+                <div className={classes.securityInfoItem} key={item.stockId}>
                   <div className={classes.securityName}>{item.증권사이름}</div>
                   <div className={classes.rate}>{item.비례경쟁률}:1</div>
                   <div className={classes.rate}>
-                    {numberWithCommas(stock.확정공모가 * item.비례경쟁률)}원
+                    {getMoneyNeededForOne(stock, item)}원
                   </div>
                   {/* <div className={classes.rate}>{item.총청약건수}</div> */}
                 </div>
@@ -145,7 +150,7 @@ export const getServerSideProps: GetServerSideProps<ILiveDetailPageProps> =
       `http://3.35.66.51:4000/api/stock/${context.params.id}`
     );
     if (res.status >= 400) return { props: {} };
-    const stock: 공모주 = await res.json();
+    const stock: IStock = await res.json();
 
     return {
       props: { stock },
