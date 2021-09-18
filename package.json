@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "ddasang",
+  "version": "0.1.0",
+  "description": "ddasang monorepo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoomKoding/ddasang.git"
+  },
+  "author": "zoomkoding",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zoomKoding/ddasang/issues"
+  },
+  "homepage": "https://github.com/zoomKoding/ddasang#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.3",
+    "lerna": "^4.0.0"
+  }
+}

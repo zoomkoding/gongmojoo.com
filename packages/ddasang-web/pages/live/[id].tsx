@@ -146,9 +146,7 @@ export const getServerSideProps: GetServerSideProps<ILiveDetailPageProps> =
     if (!context.params?.id) {
       return { props: {} };
     }
-    const res = await fetch(
-      `http://3.35.66.51:4000/api/stock/${context.params.id}`
-    );
+    const res = await fetch(`${process.env.URL}/gongmo/${context.params.id}`);
     if (res.status >= 400) return { props: {} };
     const stock: IStock = await res.json();
 
