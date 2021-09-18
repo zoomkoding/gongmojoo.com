@@ -5,17 +5,18 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { IStockEvent } from '@@/types';
-
 @Entity()
 export class StockEvent {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 45 })
-  이름: IStockEvent['이름'];
+  공모주이름: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'varchar', length: 45 })
+  이름: string;
+
+  @Column({ type: 'date', nullable: true })
   날짜: string;
 
   @CreateDateColumn()

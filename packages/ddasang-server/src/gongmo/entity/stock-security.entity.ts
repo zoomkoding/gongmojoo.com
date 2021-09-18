@@ -11,11 +11,8 @@ export class StockSecurity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'integer' })
-  securityId: number;
-
-  @Column({ type: 'integer' })
-  stockId: number;
+  @Column({ type: 'varchar', length: 45 })
+  공모주이름: number;
 
   @Column({ type: 'varchar', length: 45 })
   증권사이름: string;
