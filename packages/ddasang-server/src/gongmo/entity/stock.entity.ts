@@ -17,6 +17,9 @@ export class Stock {
   @Column({ type: 'varchar', length: 45 })
   업종: string;
 
+  @Column({ type: 'json' })
+  주간사: string[];
+
   @Column({ type: 'float', nullable: true })
   최종청약경쟁률?: number;
 
