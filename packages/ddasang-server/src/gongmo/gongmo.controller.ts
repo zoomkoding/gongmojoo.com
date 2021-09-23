@@ -5,9 +5,9 @@ import { GongmoService } from './gongmo.service';
 export class GongmoController {
   @Inject() gongmoService: GongmoService;
 
-  @Get('/stock')
-  getStockList() {
-    return [];
+  @Get('/home')
+  getHomePageData() {
+    return this.gongmoService.getHomePageData();
   }
 
   @Get('/stock/:id')
