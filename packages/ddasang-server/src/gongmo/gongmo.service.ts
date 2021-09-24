@@ -9,7 +9,6 @@ import {
   MoreThanOrEqual,
   Repository,
 } from 'typeorm';
-import { StockSecurity } from './entity/stock-security.entity';
 import { Stock } from './entity/stock.entity';
 
 @Injectable()
@@ -22,10 +21,10 @@ export class GongmoService {
   }
 
   getStocksUpcoming(options?: FindManyOptions<Stock>) {
-    return this.stockRepository.findAndCount({
+    return this.stockRepository.find({
       where: { 공모청약시작일: MoreThan(new Date()) },
       order: { 공모청약시작일: 'ASC' },
-      take: 10,
+      take: 5,
       ...options,
     });
   }
@@ -58,10 +57,10 @@ export class GongmoService {
     try {
       const finished = await this.getStocksFinished({ transaction: true });
       const inProgress = await this.getStocksInProgress({ transaction: true });
-      const upComing = await this.getStocksFinished({ transaction: true });
+      const upcoming = await this.getStocksUpcoming({ transaction: true });
 
       await queryRunner.commitTransaction();
-      return { stocks: { finished, inProgress, upComing } };
+      return { stocks: { finished, inProgress, upcoming } };
     } catch (err) {
       await queryRunner.rollbackTransaction();
     } finally {
