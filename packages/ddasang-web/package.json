@@ -1,9 +1,9 @@
 {
-  "name": "ddasang-client",
+  "name": "ddasang-web",
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=production PORT=8080 next dev",
+    "dev": "NODE_ENV=development PORT=8080 next dev",
     "build": "next build",
     "start": "NODE_ENV=production PORT=8080 next start",
     "lint": "next lint"
