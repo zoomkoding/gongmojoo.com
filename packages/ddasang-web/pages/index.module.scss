@@ -1,27 +1,31 @@
 @use '@/styles/mixins'as *;
 
-.homePage {
-  width: 100%;
-  height: 100%;
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .introduction {
-  text-align: center;
-  margin-bottom: 50px;
-  font-size: 66px;
-  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  @include horizontal-padding;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 1.4;
   color: rgb(0, 0, 0);
 
   .secondLine {
     display: flex;
+    line-height: 1.5;
   }
+
+  .ddasang {
+    color: #f52f52;
+  }
+}
+
+.space {
+  display: none;
 }
 
 .introduction,
@@ -31,26 +35,26 @@
 
 .promotion {
   line-height: 1.5;
-  font-size: 45px;
+  font-size: 25px;
   font-weight: 600;
   color: #1e63ff;
 }
 
-@include smaller-than(700px) {
+@include larger-than(700px) {
   .introduction {
-    font-size: 35px;
+    font-size: 50px;
 
     .secondLine {
-      flex-direction: column;
-      line-height: 1.5;
-
-      .space {
-        display: none;
-      }
+      display: flex;
     }
   }
 
+  .space {
+    display: block;
+  }
+
   .promotion {
-    font-size: 25px;
+    font-size: 45px;
+
   }
 }
