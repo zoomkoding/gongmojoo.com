@@ -50,16 +50,16 @@ export class Stock {
   @Column({ type: 'varchar', length: 45, nullable: true })
   현재가?: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   수요예측시작일?: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   수요예측종료일?: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   공모청약시작일?: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'datetime', nullable: true })
   공모청약종료일?: string;
 
   @Column({ type: 'date', nullable: true })
