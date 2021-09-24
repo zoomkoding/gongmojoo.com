@@ -1,0 +1,35 @@
+@use '@/styles/mixins'as *;
+
+.section {
+    width: 100%;
+    @include horizontal-padding;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 13px;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    gap: 5px;
+}
+
+.title {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.subtitle {
+    width: 100%;
+    margin-top: 3px;
+    font-size: 14px;
+    color: #8b95a1;
+}
+
+@include smaller-than(850px) {}
