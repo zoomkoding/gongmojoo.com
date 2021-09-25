@@ -1,0 +1,42 @@
+.section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    gap: 10px;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.stockCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 13px;
+    padding: 10px 15px 15px;
+    background-color: #f9fafb;
+    height: 90px;
+    min-width: 90px;
+}
+
+.name {
+    font-size: 14px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.rate {
+    font-size: 15px;
+}
