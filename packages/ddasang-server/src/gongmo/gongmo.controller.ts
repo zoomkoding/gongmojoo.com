@@ -10,6 +10,11 @@ export class GongmoController {
     return this.gongmoService.getHomePageData();
   }
 
+  @Get('/prepare')
+  getPreparePageData() {
+    return this.gongmoService.getPreparePageData();
+  }
+
   @Get('/stock')
   getAllStockIds() {
     return this.gongmoService.getAllStockIds();

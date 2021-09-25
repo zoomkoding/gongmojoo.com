@@ -17,8 +17,8 @@ export class Security {
   @Column({ type: 'tinyint' })
   이십일제한여부: boolean;
 
-  @Column({ type: 'json' })
-  연계개설가능은행: string[];
+  @Column({ type: 'json', nullable: true })
+  연계개설가능은행?: string[];
 
   @Column({ type: 'tinyint' })
   당일개설청약가능여부: boolean;

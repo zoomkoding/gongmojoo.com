@@ -3,10 +3,12 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+import { flatten, uniq } from 'lodash';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   FindManyOptions,
   getConnection,
+  In,
   LessThanOrEqual,
   MoreThan,
   MoreThanOrEqual,
@@ -14,6 +16,7 @@ import {
 } from 'typeorm';
 import { StockSecurity } from './entity/stock-security.entity';
 import { Stock } from './entity/stock.entity';
+import { Security } from './entity/security.entity';
 
 @Injectable()
 export class GongmoService {
@@ -23,6 +26,9 @@ export class GongmoService {
   @InjectRepository(StockSecurity)
   private stockSecurityRepository: Repository<StockSecurity>;
 
+  @InjectRepository(Security)
+  private securityRepository: Repository<Security>;
+
   async getStockDetails(id: number) {
     const stock = await this.stockRepository.findOne({ id });
     if (!stock) return NotFoundException;
@@ -30,6 +36,15 @@ export class GongmoService {
       공모주이름: stock.이름,
     });
     return { stock, stockSecurities };
+  }
+
+  async getPreparePageData() {
+    const stocks = await this.getStocksUpcoming();
+    const securityNames = uniq(flatten(stocks.map(({ 주간사 }) => 주간사)));
+    const securities = await this.securityRepository.find({
+      이름: In(securityNames),
+    });
+    return { stocks, securities };
   }
 
   getAllStockIds() {
@@ -43,7 +58,7 @@ export class GongmoService {
     return this.stockRepository.find({
       where: { 공모청약시작일: MoreThan(new Date()) },
       order: { 공모청약시작일: 'ASC' },
-      take: 5,
+      take: options?.take,
       ...options,
     });
   }
@@ -55,7 +70,7 @@ export class GongmoService {
         공모청약종료일: MoreThanOrEqual(new Date()),
       },
       order: { 공모청약시작일: 'DESC' },
-      take: 5,
+      take: options?.take,
       ...options,
     });
   }
@@ -67,7 +82,7 @@ export class GongmoService {
       .andWhere("stock.이름 NOT LIKE '%스팩%'")
       .andWhere('stock.상장일 < :date', { date: new Date() })
       .orderBy('stock.상장일', 'DESC')
-      .limit(options.take || 8)
+      .limit(options.take)
       .getMany();
   }
 
@@ -75,9 +90,17 @@ export class GongmoService {
     const queryRunner = getConnection().createQueryRunner();
     await queryRunner.startTransaction();
     try {
-      const finished = await this.getStocksFinished({ transaction: true });
-      const inProgress = await this.getStocksInProgress({ transaction: true });
-      const upcoming = await this.getStocksUpcoming({ transaction: true });
+      const finished = await this.getStocksFinished({
+        transaction: true,
+        take: 8,
+      });
+      const inProgress = await this.getStocksInProgress({
+        transaction: true,
+      });
+      const upcoming = await this.getStocksUpcoming({
+        transaction: true,
+        take: 5,
+      });
 
       await queryRunner.commitTransaction();
       return { stocks: { finished, inProgress, upcoming } };
