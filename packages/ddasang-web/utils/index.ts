@@ -10,8 +10,12 @@ export function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
   return numberWithCommas(공모가기준증거금 * security.비례경쟁률);
 }
 
-export function getLocalDate(x?: string) {
+export function getLocalDate(x?: string, version?: "simple" | "normal") {
   if (!x) return;
+  if (version === "simple") {
+    const date = new Date(x);
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  }
   return new Date(x).toLocaleDateString("kr", {
     month: "narrow",
     day: "2-digit",
@@ -40,4 +44,12 @@ export function getTagFor기관경쟁률({ 기관경쟁률 }: IStock): {
   if (기관경쟁률 > 800) return { value: "나쁘지않음🙂" };
   if (기관경쟁률 > 700) return { value: "흐음🤔" };
   return { value: "나쁨🤮" };
+}
+
+export function getDateDiff(from?: Date | string, to?: Date | string) {
+  if (!from || !to) return undefined;
+  const dayToMs = 1000 * 3600 * 24;
+  return Math.ceil(
+    (new Date(from).getTime() - new Date(to).getTime()) / dayToMs
+  );
 }
