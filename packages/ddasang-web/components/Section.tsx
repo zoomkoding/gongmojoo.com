@@ -1,17 +1,15 @@
 import React, { ReactNode } from "react";
 import classes from "./Section.module.scss";
+import SectionHeader, { ISectionHeaderProps } from "./SectionHeader";
 
-export interface ISectionProps {
-  title?: string | ReactNode;
-  subtitle?: string | ReactNode;
+export interface ISectionProps extends ISectionHeaderProps {
   children?: ReactNode;
 }
 
-function Section({ title, subtitle, children }: ISectionProps) {
+function Section({ children, ...sectionHeaderProps }: ISectionProps) {
   return (
     <div className={classes.section}>
-      {title && <div className={classes.title}>{title}</div>}
-      {subtitle && <div className={classes.subtitle}>{subtitle}</div>}
+      <SectionHeader {...sectionHeaderProps} />
       <div className={classes.content}>{children}</div>
     </div>
   );

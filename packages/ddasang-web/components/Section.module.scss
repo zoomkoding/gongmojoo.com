@@ -8,6 +8,7 @@
 .content {
     display: flex;
     flex-direction: column;
+    width: 100%;
     min-height: 150px;
     background-color: white;
     padding: 20px;
@@ -17,19 +18,5 @@
     margin-bottom: 50px;
     margin-top: 10px;
     gap: 5px;
-}
 
-.title {
-    width: 100%;
-    font-size: 20px;
-    font-weight: 600;
 }
-
-.subtitle {
-    width: 100%;
-    margin-top: 3px;
-    font-size: 14px;
-    color: #8b95a1;
-}
-
-@include smaller-than(850px) {}
