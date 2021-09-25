@@ -4,7 +4,7 @@
     width: 100%;
 
     &.selfIndent {
-        @include responsive-padding;
+        @include horizontal-padding;
     }
 
     .title {
