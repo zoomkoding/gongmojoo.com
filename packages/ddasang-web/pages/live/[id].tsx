@@ -1,33 +1,20 @@
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
+import { getLocalTime, getMoneyNeededForOne } from "@/utils";
 import { IStock, IStockSecurity } from "@@/types";
 import classNames from "classnames";
-import { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React from "react";
 import classes from "./LiveDetail.module.scss";
 
 export interface ILiveDetailPageProps {
-  stock?: IStock;
+  stock: IStock;
+  stockSecurities: IStockSecurity[];
 }
 
-function numberWithCommas(x: number) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
-  if (!stock.확정공모가) return 0;
-  const 공모가기준증거금 = stock.확정공모가 * stock.증거금비율 * 0.01;
-  return numberWithCommas(공모가기준증거금 * security.비례경쟁률);
-}
-
-function getCurrentTime(x: string) {
-  return new Date(x).toLocaleTimeString("kr", {
-    month: "narrow",
-    day: "2-digit",
-  });
-}
-
-const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
+const LiveDetail: NextPage<ILiveDetailPageProps> = ({
+  stock,
+  stockSecurities,
+}) => {
   if (!stock) {
     return (
       <DefaultPageLayout>
@@ -40,36 +27,13 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
   }
 
   return (
-    <DefaultPageLayout>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2827068140840250"
-        crossOrigin="anonymous"
-      ></script>
-      <Head>
-        <title>{stock.이름} 증권사별 실시간 청약 경쟁률 - 따상</title>
-        <meta
-          property="description"
-          content={`따상 - ${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
-        />
-        <meta
-          property="og:title"
-          content={`${stock.이름} 증권사별 실시간 청약 경쟁률 - 따상`}
-          data-react-helmet="true"
-        />
-        <meta
-          property="og:description"
-          content={`따상 - ${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 비례 배정 받기 위해 필요한 증거금을 알려드립니다.`}
-        />
-        <meta property="og:type" content="website" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <DefaultPageLayout
+      title={`${stock.이름} 증권사별 실시간 청약 경쟁률 - 따상`}
+      description={`${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 배정 받기 위해 필요한 증거금을 알려드립니다.`}
+    >
       <div className={classes.liveDetailPage}>
         <div className={classes.pageContent}>
-          <div className={classes.pageName}>
-            공모주 실시간 경쟁률
-            {/* <QuestionCircle /> */}
-          </div>
+          <div className={classes.pageName}>공모주 실시간 경쟁률</div>
           <div className={classes.section}>
             <div className={classes.sectionContent}>
               <div className={classes.sectionHeader}>종목 정보</div>
@@ -95,11 +59,6 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
                   </div>
                 </div>
               </div>
-              {/* <div className={classes.moreInfoButton}>
-                <div className={classes.button}>
-                  더보기 <ChevronRight />
-                </div>
-              </div> */}
             </div>
           </div>
 
@@ -107,7 +66,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
             <div className={classes.sectionHeader}>
               실시간 경쟁률
               <div className={classes.lastUpdatedTime}>
-                {getCurrentTime(stock.주간사[0].updatedAt)} 기준
+                {getLocalTime(stockSecurities[0].updatedAt)} 기준
               </div>
             </div>
 
@@ -122,12 +81,14 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
                 <div className={classes.rate}>비례경쟁률</div>
                 <div className={classes.rate}>1주당필요증거금</div>
               </div>
-              {stock.주간사.map((item) => (
-                <div className={classes.securityInfoItem} key={item.stockId}>
-                  <div className={classes.securityName}>{item.증권사이름}</div>
-                  <div className={classes.rate}>{item.비례경쟁률}:1</div>
+              {stockSecurities.map((security) => (
+                <div className={classes.securityInfoItem} key={security.id}>
+                  <div className={classes.securityName}>
+                    {security.증권사이름}
+                  </div>
+                  <div className={classes.rate}>{security.비례경쟁률}:1</div>
                   <div className={classes.rate}>
-                    {getMoneyNeededForOne(stock, item)}원
+                    {getMoneyNeededForOne(stock, security)}원
                   </div>
                   {/* <div className={classes.rate}>{item.총청약건수}</div> */}
                 </div>
@@ -140,19 +101,28 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({ stock }) => {
   );
 };
 
-// This gets called on every request
-export const getServerSideProps: GetServerSideProps<ILiveDetailPageProps> =
-  async (context) => {
-    if (!context.params?.id) {
-      return { props: {} };
-    }
-    const res = await fetch(`${process.env.URL}/gongmo/${context.params.id}`);
-    if (res.status >= 400) return { props: {} };
-    const stock: IStock = await res.json();
-
-    return {
-      props: { stock },
-    };
-  };
-
 export default LiveDetail;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(`${process.env.API_URL}/gongmo/stock`);
+  const list: { id: number }[] = await res.json();
+  const paths = list.map(({ id }) => ({
+    params: { id: id.toString() },
+  }));
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps<ILiveDetailPageProps> = async (
+  context
+) => {
+  if (!context.params?.id) return { notFound: true };
+  const res = await fetch(
+    `${process.env.API_URL}/gongmo/stock/${context.params.id}`
+  );
+  if (res.status >= 400) return { notFound: true };
+
+  const props: ILiveDetailPageProps = await res.json();
+  if (!props.stock) return { notFound: true };
+
+  return { props };
+};
