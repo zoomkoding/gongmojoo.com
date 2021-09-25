@@ -53,7 +53,6 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
   );
 };
 
-// This gets called on every request
 export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
   const res = await fetch(`${process.env.API_URL}/gongmo/home`);
   if (res.status >= 400) return { notFound: true };
