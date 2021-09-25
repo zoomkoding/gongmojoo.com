@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
-    "framework7-icons-plus": "^1.7.0",
+    "framework7-icons": "^5.0.3",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
