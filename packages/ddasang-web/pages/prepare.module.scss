@@ -1,0 +1,68 @@
+@use '@/styles/mixins'as *;
+
+.introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    @include horizontal-padding;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: rgb(0, 0, 0);
+
+    .secondLine {
+        display: flex;
+        line-height: 1.5;
+    }
+
+    .ddasang {
+        color: red;
+        font-weight: 600;
+    }
+}
+
+.stockChips {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 8px;
+}
+
+.stockChip {
+    background-color: #f3f3f3;
+    padding: 7px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    color: rgb(51, 61, 75);
+
+    &.selected {
+        background-color: #3182f6;
+        color: white;
+        font-weight: 500;
+    }
+}
+
+.securityChip {
+    background-color: #f3f3f3;
+    padding: 7px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    color: rgb(51, 61, 75);
+
+    &.selected {
+        background-color: #3182f6;
+        color: white;
+        font-weight: 500;
+    }
+}
+
+.submitButton {
+    margin-top: auto;
+
+    padding-bottom: 15px;
+    width: 100%;
+    @include horizontal-padding;
+}

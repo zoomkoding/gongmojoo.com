@@ -40,7 +40,10 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
         title="계좌는 잘 준비하셨나요?"
         subtitle="다가오는 공모주에 필요한 증권 계좌를 잘 준비할 수 있도록!"
       >
-        <HrefButton href="/" buttonText="다가오는 공모주 준비하러 가기" />
+        <HrefButton
+          href="/prepare"
+          buttonText="다가오는 공모주 준비하러 가기"
+        />
       </Section>
       <Divider />
       <Divider hide={stocks.inProgress.length === 0} />
