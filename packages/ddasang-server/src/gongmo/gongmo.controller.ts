@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Patch } from '@nestjs/common';
+import { Controller, Get, Inject, Param, Patch } from '@nestjs/common';
 import { GongmoService } from './gongmo.service';
 
 @Controller('gongmo')
@@ -10,9 +10,14 @@ export class GongmoController {
     return this.gongmoService.getHomePageData();
   }
 
+  @Get('/stock')
+  getAllStockIds() {
+    return this.gongmoService.getAllStockIds();
+  }
+
   @Get('/stock/:id')
-  getStockDetails() {
-    return;
+  getStockDetails(@Param('id') id: number) {
+    return this.gongmoService.getStockDetails(id);
   }
 
   @Patch('/stock/:name')

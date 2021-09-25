@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   FindManyOptions,
@@ -8,6 +12,7 @@ import {
   MoreThanOrEqual,
   Repository,
 } from 'typeorm';
+import { StockSecurity } from './entity/stock-security.entity';
 import { Stock } from './entity/stock.entity';
 
 @Injectable()
@@ -15,8 +20,23 @@ export class GongmoService {
   @InjectRepository(Stock)
   private stockRepository: Repository<Stock>;
 
-  getStockDetails() {
-    return this.stockRepository.findOne({});
+  @InjectRepository(StockSecurity)
+  private stockSecurityRepository: Repository<StockSecurity>;
+
+  async getStockDetails(id: number) {
+    const stock = await this.stockRepository.findOne({ id });
+    if (!stock) return NotFoundException;
+    const stockSecurities = await this.stockSecurityRepository.find({
+      공모주이름: stock.이름,
+    });
+    return { stock, stockSecurities };
+  }
+
+  getAllStockIds() {
+    return this.stockRepository
+      .createQueryBuilder('stock')
+      .select(['stock.id'])
+      .getMany();
   }
 
   getStocksUpcoming(options?: FindManyOptions<Stock>) {
@@ -54,7 +74,6 @@ export class GongmoService {
   async getHomePageData() {
     const queryRunner = getConnection().createQueryRunner();
     await queryRunner.startTransaction();
-
     try {
       const finished = await this.getStocksFinished({ transaction: true });
       const inProgress = await this.getStocksInProgress({ transaction: true });
@@ -65,6 +84,7 @@ export class GongmoService {
     } catch (err) {
       console.log(err);
       await queryRunner.rollbackTransaction();
+      return InternalServerErrorException;
     } finally {
       await queryRunner.release();
     }
