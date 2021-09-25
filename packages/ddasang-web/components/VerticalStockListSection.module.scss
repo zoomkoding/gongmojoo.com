@@ -1,16 +1,16 @@
 .section {
     width: 100%;
-    margin-bottom: 20px;
+    padding: 20px 0;
 }
 
 .content {
     display: flex;
     width: 100%;
-    padding: 20px;
     font-weight: 500;
     font-size: 14px;
     gap: 10px;
     overflow-x: scroll;
+    padding: 20px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -20,12 +20,11 @@
 .stockCard {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     border-radius: 13px;
-    padding: 10px 15px 15px;
+    padding: 20px 15px 10px;
     background-color: #f9fafb;
-    height: 90px;
-    min-width: 90px;
+    height: 100px;
+    min-width: 100px;
 }
 
 .name {
@@ -39,4 +38,12 @@
 
 .rate {
     font-size: 15px;
+}
+
+.showMore {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    font-size: 11px;
+    color: #9595af;
 }

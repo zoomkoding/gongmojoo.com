@@ -26,6 +26,7 @@ function VerticalStockListSection({ stocks }: IVerticalStockListSectionProps) {
             >
               {get상승률(stock).value}
             </div>
+            <div className={classes.showMore}>자세히</div>
           </div>
         ))}
       </div>
