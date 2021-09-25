@@ -1,4 +1,6 @@
+import Divider from "@/components/Divider";
 import StockListSection from "@/components/StockListSection";
+import VerticalStockListSection from "@/components/VerticalStockListSection";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import { IStock } from "@@/types";
 import type { GetStaticProps, NextPage } from "next";
@@ -16,26 +18,25 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
   return (
     <DefaultPageLayout>
       <h1 className={classes.introduction}>
-        <div>공모주 청약 준비,</div>
+        <div>요즘 핫한 공모주 청약,</div>
         <div className={classes.secondLine}>
-          <p className={classes.ddasang}>따상</p>
-          <p>에서 쉽고 간편하게!</p>
+          <p>
+            <strong className={classes.ddasang}>따상</strong>에서 따상하자!
+          </p>
         </div>
       </h1>
+      <VerticalStockListSection stocks={stocks.finished} />
+      <Divider />
       <StockListSection
         stocks={stocks.inProgress}
         title="현재 진행중인 공모주"
         subtitle="현재 청약을 신청할 수 있는 공모주 리스트입니다."
       />
+      <Divider />
       <StockListSection
         stocks={stocks.upcoming}
         title="청약 예정인 공모주"
         subtitle="곧 청약이 진행될 공모주 리스트입니다."
-      />
-      <StockListSection
-        stocks={stocks.finished}
-        title="상장된 공모주"
-        subtitle="이미 상장된 공모주 리스트입니다."
       />
     </DefaultPageLayout>
   );
