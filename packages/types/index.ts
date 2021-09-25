@@ -35,8 +35,8 @@ export interface IStock {
 }
 
 export interface IStockSecurity {
-  securityId: number;
-  stockId: number;
+  id: number;
+  공모주이름: string;
   증권사이름: string;
   일반경쟁률: number;
   비례경쟁률: number;
