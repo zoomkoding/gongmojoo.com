@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   FindManyOptions,
   getConnection,
-  LessThan,
   LessThanOrEqual,
   MoreThan,
   MoreThanOrEqual,
@@ -42,12 +41,14 @@ export class GongmoService {
   }
 
   getStocksFinished(options?: FindManyOptions<Stock>) {
-    return this.stockRepository.find({
-      where: { 공모청약종료일: LessThan(new Date()) },
-      order: { 공모청약시작일: 'DESC' },
-      take: 5,
-      ...options,
-    });
+    return this.stockRepository
+      .createQueryBuilder('stock')
+      .where("stock.이름 NOT LIKE '%리츠%'")
+      .andWhere("stock.이름 NOT LIKE '%스팩%'")
+      .andWhere('stock.상장일 < :date', { date: new Date() })
+      .orderBy('stock.상장일', 'DESC')
+      .limit(options.take || 10)
+      .getMany();
   }
 
   async getHomePageData() {
@@ -62,6 +63,7 @@ export class GongmoService {
       await queryRunner.commitTransaction();
       return { stocks: { finished, inProgress, upcoming } };
     } catch (err) {
+      console.log(err);
       await queryRunner.rollbackTransaction();
     } finally {
       await queryRunner.release();
