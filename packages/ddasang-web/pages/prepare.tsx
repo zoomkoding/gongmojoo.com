@@ -99,7 +99,7 @@ const Prepare: NextPage<IPreparePageProps> = ({ stocks, securities }) => {
 
       <Section
         title="보유 중인 증권 계좌 선택"
-        subtitle="아래는 선택하신 공모주를 주간하는 증권사 목록입니다. 가지고 계신 증권 계좌를 선택해주세요."
+        subtitle="아래는 선택하신 공모주를 주간하는 증권사 목록입니다. 가지고 계신 증권 계좌를 선택하세요!"
       >
         <div className={classes.stockChips}>
           {securitiesFromSelectedStocks.map((securityName) => (
@@ -119,7 +119,7 @@ const Prepare: NextPage<IPreparePageProps> = ({ stocks, securities }) => {
         </div>
       </Section>
       <div className={classes.submitButton}>
-        <HrefButton href="/" buttonText="계좌 개설 순서 보기" />
+        <HrefButton href="/" buttonText="계좌 준비 순서 보기" />
       </div>
     </DefaultPageLayout>
   );
