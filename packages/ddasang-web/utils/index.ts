@@ -22,6 +22,14 @@ export function getLocalDate(x?: string, version?: "simple" | "normal") {
   });
 }
 
+export function getLocalTime(x?: string) {
+  if (!x) return;
+  return new Date(x).toLocaleTimeString("kr", {
+    month: "narrow",
+    day: "2-digit",
+  });
+}
+
 export function get상승률({ 확정공모가, 상장일종가 }: IStock): {
   color: "black" | "red" | "blue";
   value: string;
