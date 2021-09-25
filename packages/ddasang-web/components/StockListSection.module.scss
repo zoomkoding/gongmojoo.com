@@ -1,6 +1,14 @@
+@use '@/styles/mixins'as *;
+
 .stockCards {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 10px;
+}
+
+@include larger-than(700px) {
+    .stockCards {
+        gap: 25px;
+    }
 }

@@ -37,7 +37,8 @@ function StockCard({ stock }: IStockCardProps) {
           ))}
           {stock.주간사.length > 2 && (
             <div className={classes.moreSecurity}>
-              +{stock.주간사.length - 2}
+              <i className="framework7-icons">plus</i>
+              {stock.주간사.length - 2}
             </div>
           )}
         </div>

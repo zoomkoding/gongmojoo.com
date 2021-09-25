@@ -10,8 +10,9 @@
     width: 100%;
     height: 60px;
     background-color: white;
-
+    border-bottom: 1px solid #e7e7e7;
 }
+
 
 .headerContent {
     display: flex;
@@ -76,10 +77,6 @@
 }
 
 @include smaller-than(850px) {
-    .header {
-        border-bottom: 1px solid #e7e7e7;
-    }
-
     .menus {
         position: fixed;
         display: none;
@@ -91,10 +88,15 @@
 
     .showMenuButton {
         display: flex;
+        width: 30px;
+        height: 30px;
         align-items: center;
-        font-size: 30px;
         color: rgb(176, 184, 193);
         cursor: pointer;
+
+        i {
+            font-size: 30px;
+        }
     }
 
 

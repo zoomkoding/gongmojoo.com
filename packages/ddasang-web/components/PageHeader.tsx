@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Link from "next/link";
 import React, { useState } from "react";
 import classes from "./PageHeader.module.scss";
 
@@ -13,20 +14,22 @@ function PageHeader() {
       })}
     >
       <div className={classes.headerContent}>
-        {/* <Link href="/" passHref> */}
-        <div className={classes.logo}>
-          <p className={classes.icon}>🤑</p> 따상
-        </div>
-        {/* </Link> */}
+        <Link href="/" passHref>
+          <div className={classes.logo}>
+            <p className={classes.icon}>🤑</p> 따상
+          </div>
+        </Link>
 
-        {/* <div
+        <div
           className={classes.showMenuButton}
           onClick={() => setIsMenuOpened((value) => !value)}
         >
-          {isMenuOpened ? <Multiply /> : <Bars />}
-        </div> */}
+          <i className="framework7-icons">
+            {isMenuOpened ? "multiply" : "bars"}
+          </i>
+        </div>
 
-        {/* <div className={classes.menus}>
+        <div className={classes.menus}>
           <div className={classes.menu}>
             <Link href="/about" passHref>
               <a>공모주 따상이란</a>
@@ -50,7 +53,7 @@ function PageHeader() {
           <div className={classes.menu}>
             <a>피드백 남기기</a>
           </div>
-        </div> */}
+        </div>
       </div>
     </header>
   );

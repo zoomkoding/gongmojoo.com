@@ -21,10 +21,10 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
   return (
     <DefaultPageLayout>
       <h1 className={classes.introduction}>
-        <div>요즘 핫한 공모주 청약,</div>
+        <div>🔥 요즘 핫한 공모주 청약,</div>
         <div className={classes.secondLine}>
           <p>
-            <strong className={classes.ddasang}>따상</strong>에서 준비하자!
+            <strong className={classes.ddasang}>따상</strong>에서 준비하세요!
           </p>
         </div>
       </h1>
@@ -37,8 +37,8 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
         subtitle="현재 청약을 신청할 수 있는 공모주 리스트입니다."
       />
       <Section
-        title="공모주린이를 위한 필승 전략"
-        subtitle="다가오는 공모주에 필요한 증권계좌를 잘 만들 수 있도록!"
+        title="계좌는 잘 준비하셨나요?"
+        subtitle="다가오는 공모주에 필요한 증권 계좌를 잘 준비할 수 있도록!"
       >
         <HrefButton href="/" buttonText="다가오는 공모주 준비하러 가기" />
       </Section>

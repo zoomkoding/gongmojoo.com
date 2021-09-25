@@ -6,6 +6,10 @@ export interface IDividerProps {
 }
 
 function Divider({ hide }: IDividerProps) {
-  return hide ? null : <div className={classes.divider} />;
+  return hide ? null : (
+    <div className={classes.dividerContainer}>
+      <div className={classes.divider} />
+    </div>
+  );
 }
 export default Divider;

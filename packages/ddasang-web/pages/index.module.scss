@@ -43,19 +43,20 @@
 
 @include larger-than(700px) {
   .introduction {
-    font-size: 50px;
+    font-size: 35px;
 
     .secondLine {
       display: flex;
     }
   }
+}
 
-  .space {
-    display: block;
-  }
-
-  .promotion {
+@include larger-than(900px) {
+  .introduction {
     font-size: 45px;
 
+    .secondLine {
+      display: flex;
+    }
   }
 }

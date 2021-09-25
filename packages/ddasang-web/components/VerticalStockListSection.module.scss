@@ -1,3 +1,5 @@
+@use '@/styles/mixins'as *;
+
 .section {
     width: 100%;
     padding: 20px 0;
@@ -6,11 +8,11 @@
 .content {
     display: flex;
     width: 100%;
-    font-weight: 500;
-    font-size: 14px;
     gap: 10px;
     overflow-x: scroll;
-    padding: 20px;
+    @include horizontal-padding;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -25,6 +27,7 @@
     background-color: #f9fafb;
     height: 100px;
     min-width: 100px;
+    font-weight: 500;
 }
 
 .name {
@@ -46,4 +49,25 @@
     margin-top: auto;
     font-size: 11px;
     color: #9595af;
+}
+
+
+@include larger-than(700px) {
+    .stockCard {
+        height: 130px;
+        min-width: 130px;
+    }
+
+    .name {
+        font-size: 19px;
+    }
+
+    .rate {
+        font-size: 20px;
+    }
+
+    .showMore {
+        font-size: 15px;
+    }
+
 }

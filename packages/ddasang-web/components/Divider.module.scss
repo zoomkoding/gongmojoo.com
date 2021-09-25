@@ -1,5 +1,24 @@
+@use '@/styles/mixins'as *;
+
+.dividerContainer {
+    width: 100%;
+    @include horizontal-padding
+}
+
 .divider {
     width: 100%;
     min-height: 10px;
     background-color: #f9fafb;
+}
+
+@include larger-than(700px) {
+    .divider {
+        min-height: 15px;
+    }
+}
+
+@include larger-than(1100px) {
+    .divider {
+        background-color: white;
+    }
 }

@@ -67,7 +67,7 @@ export class GongmoService {
       .andWhere("stock.이름 NOT LIKE '%스팩%'")
       .andWhere('stock.상장일 < :date', { date: new Date() })
       .orderBy('stock.상장일', 'DESC')
-      .limit(options.take || 10)
+      .limit(options.take || 8)
       .getMany();
   }
 

@@ -1,3 +1,5 @@
+@use '@/styles/mixins'as *;
+
 .stockCard {
     display: flex;
     height: 60px;
@@ -62,9 +64,16 @@
 }
 
 .moreSecurity {
+    display: flex;
+    align-items: center;
     color: #333d4b;
-    margin-left: 5px;
+    margin-left: 3px;
     font-size: 12px;
+    line-height: 100%;
+
+    i {
+        font-size: 12px;
+    }
 }
 
 
@@ -72,4 +81,41 @@
     display: flex;
     align-items: center;
     font-size: 14px;
+}
+
+@include larger-than(700px) {
+    .date {
+        width: 40px;
+    }
+
+    .dateDiff {
+        font-size: 20px;
+    }
+
+    .startingDate {
+        font-size: 15px;
+    }
+
+    .name {
+        margin: 5px 5px;
+        font-size: 20px;
+    }
+
+    .securities {
+        gap: 10px;
+    }
+
+    .security {
+        padding: 6px 9px;
+        border-radius: 12px;
+        font-size: 15px;
+    }
+
+    .moreSecurity {
+        font-size: 15px;
+
+        i {
+            font-size: 15px;
+        }
+    }
 }
