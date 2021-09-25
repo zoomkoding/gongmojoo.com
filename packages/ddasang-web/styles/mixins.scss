@@ -29,3 +29,18 @@
         padding-right: 50px;
     }
 }
+
+@mixin horizontal-margin {
+    margin-left: 15px;
+    margin-right: 15px;
+
+    @include larger-than(500px) {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    @include larger-than(850px) {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
