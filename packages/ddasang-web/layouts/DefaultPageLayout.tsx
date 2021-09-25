@@ -5,9 +5,15 @@ import classes from "./DefaultPageLayout.module.scss";
 
 export interface IDefaultPageLayoutProps {
   children: ReactNode;
+  title?: string;
+  description?: string;
 }
 
-function DefaultPageLayout({ children }: IDefaultPageLayoutProps) {
+function DefaultPageLayout({
+  title = "따상 - 공모주의 모든 것",
+  description = "다가오는 공모주 청약을 위한 계좌 개설 준비부터 실시간 청약 경쟁률까지 아쉬움 없는 공모주 청약을 도와드립니다.",
+  children,
+}: IDefaultPageLayoutProps) {
   return (
     <div className={classes.defaultPageLayout}>
       <Head>
@@ -33,6 +39,12 @@ function DefaultPageLayout({ children }: IDefaultPageLayoutProps) {
             `,
           }}
         />
+        <title>{title}</title>
+        <meta property="description" content={description} />
+        <meta property="og:title" content={title} data-react-helmet="true" />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageHeader />
       <main className={classes.main}>{children}</main>
