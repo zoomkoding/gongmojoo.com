@@ -1,12 +1,22 @@
-.title {
-    width: 100%;
-    font-size: 20px;
-    font-weight: 600;
-}
+@use '@/styles/mixins'as *;
 
-.subtitle {
+.sectionHeader {
     width: 100%;
-    margin-top: 3px;
-    font-size: 14px;
-    color: #8b95a1;
+
+    &.selfIndent {
+        @include responsive-padding;
+    }
+
+    .title {
+        width: 100%;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        width: 100%;
+        margin-top: 3px;
+        font-size: 14px;
+        color: #8b95a1;
+    }
 }
