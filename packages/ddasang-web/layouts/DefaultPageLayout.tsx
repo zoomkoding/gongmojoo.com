@@ -25,6 +25,7 @@ function DefaultPageLayout({
           name="naver-site-verification"
           content="2c6fed5ef526d9f24df3612f630251ef56e9a1fd"
         />
+
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-G8M1X540VP"
@@ -40,11 +41,29 @@ function DefaultPageLayout({
           }}
         />
         <title>{title}</title>
-        <meta property="description" content={description} />
+        <meta
+          name="description"
+          content={description}
+          data-react-helmet="true"
+        />
+        <meta
+          property="og:site_title"
+          content={title}
+          data-react-helmet="true"
+        />
+        <meta
+          property="og:site_title"
+          content={title}
+          data-react-helmet="true"
+        />
         <meta property="og:title" content={title} data-react-helmet="true" />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta
+          property="og:description"
+          content={description}
+          data-react-helmet="true"
+        />
+        <meta property="og:type" content="website" data-react-helmet="true" />
+        <link rel="icon" href="/favicon.ico" data-react-helmet="true" />
       </Head>
       <PageHeader />
       <main className={classes.main}>{children}</main>
