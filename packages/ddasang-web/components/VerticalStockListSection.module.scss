@@ -30,9 +30,15 @@
     font-weight: 500;
 }
 
+.date {
+    margin-bottom: 10px;
+    font-size: 11px;
+    color: #8b95a1;
+}
+
 .name {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     line-height: 1.2;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -58,6 +64,10 @@
         min-width: 130px;
     }
 
+    .date {
+        font-size: 15px;
+    }
+
     .name {
         font-size: 19px;
     }
@@ -69,5 +79,4 @@
     .showMore {
         font-size: 15px;
     }
-
 }

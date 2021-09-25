@@ -18,7 +18,7 @@ export function getLocalDate(x?: string, version?: "simple" | "normal") {
   }
   return new Date(x).toLocaleDateString("kr", {
     month: "narrow",
-    day: "2-digit",
+    day: "numeric",
   });
 }
 
@@ -26,7 +26,7 @@ export function getLocalTime(x?: string) {
   if (!x) return;
   return new Date(x).toLocaleTimeString("kr", {
     month: "narrow",
-    day: "2-digit",
+    day: "numeric",
   });
 }
 
