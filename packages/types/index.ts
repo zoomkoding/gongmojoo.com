@@ -2,7 +2,7 @@ export interface ISecurity {
   id: number;
   이름: string;
   이십일제한여부: boolean;
-  연계개설가능은행: string[];
+  연계개설가능은행?: string[];
   당일개설청약가능여부: boolean;
   주간공모주: IStock[];
   updatedAt: string;
