@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.21.4",
     "classnames": "^2.3.1",
     "framework7-icons": "^5.0.3",
+    "globby": "^11.0.4",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
     "next": "11.1.2",
+    "prettier": "^2.4.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "@types/react": "17.0.20",
