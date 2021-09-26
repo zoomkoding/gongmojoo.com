@@ -1,4 +1,5 @@
 import { IStock, IStockSecurity } from "@/../types";
+import dayjs from "dayjs";
 
 export function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -12,14 +13,8 @@ export function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
 
 export function getLocalDate(x?: string, version?: "simple" | "normal") {
   if (!x) return;
-  if (version === "simple") {
-    const date = new Date(x);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
-  }
-  return new Date(x).toLocaleDateString("kr", {
-    month: "narrow",
-    day: "numeric",
-  });
+  if (version === "simple") return dayjs(x).format("M/D");
+  return dayjs(x).format("M월 D일");
 }
 
 export function getLocalTime(x?: string) {
@@ -56,8 +51,7 @@ export function getTagFor기관경쟁률({ 기관경쟁률 }: IStock): {
 
 export function getDateDiff(from?: Date | string, to?: Date | string) {
   if (!from || !to) return undefined;
-  const dayToMs = 1000 * 3600 * 24;
-  return Math.ceil(
-    (new Date(from).getTime() - new Date(to).getTime()) / dayToMs
-  );
+  const dateFrom = dayjs(dayjs(from).format("YYYY-MM-DD"));
+  const dateTo = dayjs(dayjs(to).format("YYYY-MM-DD"));
+  return dateFrom.diff(dateTo, "day");
 }

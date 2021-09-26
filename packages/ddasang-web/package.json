@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "classnames": "^2.3.1",
+    "dayjs": "^1.10.7",
     "framework7-icons": "^5.0.3",
     "globby": "^11.0.4",
     "lodash": "^4.17.21",
