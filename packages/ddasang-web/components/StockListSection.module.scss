@@ -3,8 +3,9 @@
 .stockCards {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 10px;
+    gap: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 @include larger-than(700px) {

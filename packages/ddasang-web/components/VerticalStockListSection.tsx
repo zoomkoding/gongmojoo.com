@@ -12,7 +12,7 @@ function VerticalStockListSection({ stocks }: IVerticalStockListSectionProps) {
   return (
     <div className={classes.section}>
       <SectionHeader
-        title="최근 상장한 공모주"
+        title="👋 최근 상장한 공모주"
         subtitle="상장한 종목들의 공모가 대비 상장일 종가입니다."
         selfIndent
       />

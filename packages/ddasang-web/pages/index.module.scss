@@ -25,20 +25,9 @@
   }
 }
 
-.space {
-  display: none;
-}
-
-.introduction,
-.promotion {
-  text-align: center;
-}
-
-.promotion {
-  line-height: 1.5;
-  font-size: 25px;
-  font-weight: 600;
-  color: #1e63ff;
+.prepareButton {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 @include larger-than(700px) {
