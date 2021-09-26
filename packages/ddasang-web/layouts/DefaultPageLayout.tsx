@@ -64,6 +64,8 @@ function DefaultPageLayout({
         />
         <meta property="og:type" content="website" data-react-helmet="true" />
         <link rel="icon" href="/favicon.ico" data-react-helmet="true" />
+        <link rel="icon" href="/favicon.ico" data-react-helmet="true" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
       </Head>
       <PageHeader />
       <main className={classes.main}>{children}</main>
