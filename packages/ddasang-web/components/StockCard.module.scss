@@ -5,17 +5,12 @@
     height: 60px;
 }
 
-.price {
-    font-size: 15px;
-    color: #3c3c3c;
-}
-
 .date {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30px;
+    width: 38px;
     height: 100%;
 }
 
@@ -74,13 +69,6 @@
     i {
         font-size: 12px;
     }
-}
-
-
-.price {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
 }
 
 @include larger-than(700px) {

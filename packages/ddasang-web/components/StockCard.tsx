@@ -20,12 +20,21 @@ function StockCard({ stock }: IStockCardProps) {
   );
   return (
     <div className={classes.stockCard}>
-      <div className={classes.date}>
-        <div className={classes.dateDiff}>{dateDiff && `D-${dateDiff}`}</div>
-        <div className={classes.startingDate}>
-          {getLocalDate(stock.공모청약시작일, "simple")}
+      {dateDiff && dateDiff > 0 ? (
+        <div className={classes.date}>
+          <div className={classes.dateDiff}>{`D-${dateDiff}`}</div>
+          <div className={classes.startingDate}>
+            {getLocalDate(stock.공모청약시작일, "simple")}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={classes.date}>
+          <div className={classes.dateDiff}>진행중</div>
+          <div className={classes.startingDate}>
+            {`~${getLocalDate(stock.공모청약종료일, "simple")}`}
+          </div>
+        </div>
+      )}
 
       <div className={classes.info}>
         <div className={classes.name}>{stock.이름}</div>
