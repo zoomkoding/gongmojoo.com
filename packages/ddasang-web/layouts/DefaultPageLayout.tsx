@@ -28,7 +28,7 @@ function DefaultPageLayout({
 
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-G8M1X540VP"
+          src="https://www.googletagmanager.com/gtag/js?id=G-01SXZPCD2W"
         />
         <script
           dangerouslySetInnerHTML={{
@@ -36,7 +36,7 @@ function DefaultPageLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-G8M1X540VP');
+              gtag('config', 'G-01SXZPCD2W');
             `,
           }}
         />
