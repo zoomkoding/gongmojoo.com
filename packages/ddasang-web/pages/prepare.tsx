@@ -4,7 +4,7 @@ import Section from "@/components/Section";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import classNames from "classnames";
 import { cloneDeep, flatten, uniq } from "lodash";
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import classes from "./prepare.module.scss";
 
@@ -127,9 +127,10 @@ const Prepare: NextPage<IPreparePageProps> = ({ stocks, securities }) => {
 
 export default Prepare;
 
-export const getStaticProps: GetStaticProps<IPreparePageProps> = async () => {
-  const res = await fetch(`${process.env.API_URL}/gongmo/prepare`);
-  if (res.status >= 400) return { notFound: true };
-  const props: IPreparePageProps = await res.json();
-  return { props };
-};
+export const getServerSideProps: GetServerSideProps<IPreparePageProps> =
+  async () => {
+    const res = await fetch(`${process.env.API_URL}/gongmo/prepare`);
+    if (res.status >= 400) return { notFound: true };
+    const props: IPreparePageProps = await res.json();
+    return { props };
+  };

@@ -2,7 +2,7 @@ import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import { getLocalTime, getMoneyNeededForOne } from "@/utils";
 import { IStock, IStockSecurity } from "@@/types";
 import classNames from "classnames";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import React from "react";
 import classes from "./Details.module.scss";
 
@@ -100,16 +100,7 @@ const Detail: NextPage<IDetailPageProps> = ({ stock, stockSecurities }) => {
 
 export default Detail;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${process.env.API_URL}/gongmo/stock`);
-  const list: { id: number }[] = await res.json();
-  const paths = list.map(({ id }) => ({
-    params: { id: id.toString() },
-  }));
-  return { paths, fallback: false };
-};
-
-export const getStaticProps: GetStaticProps<IDetailPageProps> = async (
+export const getServerSideProps: GetServerSideProps<IDetailPageProps> = async (
   context
 ) => {
   if (!context.params?.id) return { notFound: true };

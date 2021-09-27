@@ -6,7 +6,7 @@ import VerticalStockListSection from "@/components/VerticalStockListSection";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import { getDateDiff } from "@/utils";
 import { IStock } from "@@/types";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import React, { useMemo } from "react";
 import classes from "./index.module.scss";
 
@@ -75,11 +75,12 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
-  const res = await fetch(`${process.env.API_URL}/gongmo/home`);
-  if (res.status >= 400) return { notFound: true };
-  const props: IHomePageProps = await res.json();
-  return { props };
-};
+export const getServerSideProps: GetServerSideProps<IHomePageProps> =
+  async () => {
+    const res = await fetch(`${process.env.API_URL}/gongmo/home`);
+    if (res.status >= 400) return { notFound: true };
+    const props: IHomePageProps = await res.json();
+    return { props };
+  };
 
 export default Home;
