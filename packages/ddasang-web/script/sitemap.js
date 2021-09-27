@@ -3,7 +3,7 @@ const globby = require("globby");
 const prettier = require("prettier");
 
 const getDate = new Date().toISOString();
-const DOMAIN = "https://www.ddasang.co.kr";
+const DOMAIN = "https://www.gongmojoo.com";
 
 const formatted = (sitemap) => prettier.format(sitemap, { parser: "html" });
 

@@ -3,8 +3,8 @@ const fs = require("fs");
 
 const generatedSitemap = `
 User-agent: *
-Sitemap: https://www.ddasang.co.kr/sitemap.xml
-Host: https://www.ddasang.co.kr
+Sitemap: https://www.gongmojoo.com/sitemap.xml
+Host: https://www.gongmojoo.com
 `;
 
 fs.writeFileSync("../public/robots.txt", generatedSitemap, "utf8");

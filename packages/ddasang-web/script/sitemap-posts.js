@@ -5,7 +5,7 @@ const prettier = require("prettier");
 
 // 오늘 날짜 가져오기 & 도메인 설정
 const getDate = new Date().toISOString();
-const DOMAIN = "https://www.ddasang.co.kr";
+const DOMAIN = "https://www.gongmojoo.com";
 
 const formatted = (sitemap) => prettier.format(sitemap, { parser: "html" });
 (async () => {
