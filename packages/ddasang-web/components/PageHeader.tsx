@@ -15,9 +15,7 @@ function PageHeader() {
     >
       <div className={classes.headerContent}>
         <Link href="/" passHref>
-          <div className={classes.logo}>
-            <p className={classes.icon}>🤑</p> 따상
-          </div>
+          <div className={classes.logo}>공모주닷컴</div>
         </Link>
 
         <div
@@ -30,24 +28,24 @@ function PageHeader() {
         </div>
 
         <div className={classes.menus}>
-          <div className={classes.menu}>
+          {/* <div className={classes.menu}>
             <Link href="/about" passHref>
-              <a>공모주 따상이란</a>
+              <a>공모주 청약이란</a>
             </Link>
-          </div>
+          </div> */}
           <div className={classes.menu}>
             <Link href="/live" passHref>
               <a>진행중인 공모주</a>
             </Link>
           </div>
-          <div className={classes.menu}>
+          {/* <div className={classes.menu}>
             <Link href="/live" passHref>
               <a>공모주 캘린더</a>
             </Link>
-          </div>
+          </div> */}
           <div className={classes.menu}>
-            <Link href="/strategy" passHref>
-              <a>계좌 개설 정보</a>
+            <Link href="/prepare" passHref>
+              <a>계좌 준비하기</a>
             </Link>
           </div>
           <div className={classes.menu}>

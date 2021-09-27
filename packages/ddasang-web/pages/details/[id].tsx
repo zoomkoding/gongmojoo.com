@@ -25,7 +25,7 @@ const Detail: NextPage<IDetailPageProps> = ({ stock, stockSecurities }) => {
 
   return (
     <DefaultPageLayout
-      title={`${stock.이름} 증권사별 실시간 청약 경쟁률 - 따상`}
+      title={`${stock.이름} 증권사별 실시간 청약 경쟁률 - 공모주닷컴`}
       description={`${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 배정 받기 위해 필요한 증거금을 알려드립니다.`}
     >
       <div className={classes.liveDetailPage}>

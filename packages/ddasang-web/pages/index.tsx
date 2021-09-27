@@ -31,15 +31,14 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
     <DefaultPageLayout>
       <h1 className={classes.introduction}>
         <div>🔥 요즘 핫한 공모주 청약,</div>
-        <div className={classes.secondLine}>
-          <p>
-            <strong className={classes.ddasang}>따상</strong>에서 준비하세요!
-          </p>
+        <div>
+          <strong className={classes.siteName}>공모주닷컴</strong>에서
+          준비하세요!
         </div>
       </h1>
       <StockListSection
         stocks={stocks.inProgress}
-        title="😎현재 진행중인 공모주"
+        title="😎 현재 진행중인 공모주"
         subtitle="실시간 경쟁률을 알려드립니다!"
       />
       <Divider hide={stocks.inProgress.length === 0} />
