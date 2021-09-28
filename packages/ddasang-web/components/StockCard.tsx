@@ -20,6 +20,16 @@ function StockCard({ stock }: IStockCardProps) {
   );
   return (
     <div className={classes.stockCard}>
+      <div className={classes.info}>
+        <div className={classes.name}>{stock.이름}</div>
+        <div className={classes.securities}>{stock.주간사.join(", ")}</div>
+        {stock.기관경쟁률 && stock.총의무보유확약비율 && (
+          <div className={classes.details}>
+            기관경쟁률 {stock.기관경쟁률.toFixed(0)}:1 의무보유비율{" "}
+            {stock.총의무보유확약비율}%
+          </div>
+        )}
+      </div>
       {dateDiff && dateDiff > 0 ? (
         <div className={classes.date}>
           <div className={classes.dateDiff}>{`D-${dateDiff}`}</div>
@@ -35,23 +45,6 @@ function StockCard({ stock }: IStockCardProps) {
           </div>
         </div>
       )}
-
-      <div className={classes.info}>
-        <div className={classes.name}>{stock.이름}</div>
-        <div className={classes.securities}>
-          {stock.주간사.slice(0, 2).map((security) => (
-            <div className={classes.security} key={security}>
-              {security}
-            </div>
-          ))}
-          {stock.주간사.length > 2 && (
-            <div className={classes.moreSecurity}>
-              <i className="framework7-icons">plus</i>
-              {stock.주간사.length - 2}
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }
