@@ -12,6 +12,7 @@ import {
   LessThanOrEqual,
   MoreThan,
   MoreThanOrEqual,
+  Raw,
   Repository,
 } from 'typeorm';
 import { StockSecurity } from './entity/stock-security.entity';
@@ -56,7 +57,7 @@ export class GongmoService {
 
   getStocksUpcoming(options?: FindManyOptions<Stock>) {
     return this.stockRepository.find({
-      where: { 공모청약시작일: MoreThan(new Date()) },
+      where: { 공모청약시작일: Raw((alias) => `${alias} > NOW()`) },
       order: { 공모청약시작일: 'ASC' },
       take: options?.take,
       ...options,
@@ -66,8 +67,8 @@ export class GongmoService {
   getStocksInProgress(options?: FindManyOptions<Stock>) {
     return this.stockRepository.find({
       where: {
-        공모청약시작일: LessThanOrEqual(new Date()),
-        공모청약종료일: MoreThanOrEqual(new Date()),
+        공모청약시작일: Raw((alias) => `${alias} <= NOW()`),
+        공모청약종료일: Raw((alias) => `NOW() <= ${alias}`),
       },
       order: { 공모청약시작일: 'DESC' },
       take: options?.take,
@@ -80,7 +81,7 @@ export class GongmoService {
       .createQueryBuilder('stock')
       .where("stock.이름 NOT LIKE '%리츠%'")
       .andWhere("stock.이름 NOT LIKE '%스팩%'")
-      .andWhere('stock.상장일 < :date', { date: new Date() })
+      .andWhere('stock.상장일 < DATE(NOW())')
       .orderBy('stock.상장일', 'DESC')
       .limit(options.take)
       .getMany();
