@@ -2,13 +2,13 @@
 
 .dividerContainer {
     width: 100%;
-    @include horizontal-padding
+    @include horizontal-padding;
+    background-color: #f9fafb;
 }
 
 .divider {
     width: 100%;
     min-height: 10px;
-    background-color: #f9fafb;
 }
 
 @include larger-than(700px) {
