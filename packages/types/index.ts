@@ -16,8 +16,8 @@ export interface IStock {
   최종청약경쟁률?: number;
   확정공모가?: number;
   상장일종가?: number;
-  예상공모가상단: number;
-  예상공모가하단: number;
+  희망공모가상단: number;
+  희망공모가하단: number;
   기관경쟁률?: number;
   증거금비율: number;
   총의무보유확약비율?: number;
