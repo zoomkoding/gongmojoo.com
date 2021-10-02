@@ -12,7 +12,7 @@ const formatted = (sitemap) => prettier.format(sitemap, { parser: "html" });
   try {
     const res = await axios({
       method: "get",
-      url: "http://3.35.66.51:3000/gongmo/stock",
+      url: "http://3.35.66.51:3000/gongmo/stock/id",
     });
 
     const ids = res.data.map(({ id }) => id);
