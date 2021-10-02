@@ -16,6 +16,11 @@ export class GongmoController {
   }
 
   @Get('/stock')
+  getAllStocks() {
+    return this.gongmoService.getStocks();
+  }
+
+  @Get('/stock/id')
   getAllStockIds() {
     return this.gongmoService.getAllStockIds();
   }

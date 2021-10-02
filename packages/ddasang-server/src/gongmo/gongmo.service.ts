@@ -5,16 +5,7 @@ import {
 } from '@nestjs/common';
 import { flatten, uniq } from 'lodash';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  FindManyOptions,
-  getConnection,
-  In,
-  LessThanOrEqual,
-  MoreThan,
-  MoreThanOrEqual,
-  Raw,
-  Repository,
-} from 'typeorm';
+import { FindManyOptions, getConnection, In, Raw, Repository } from 'typeorm';
 import { StockSecurity } from './entity/stock-security.entity';
 import { Stock } from './entity/stock.entity';
 import { Security } from './entity/security.entity';
@@ -85,6 +76,14 @@ export class GongmoService {
       .orderBy('stock.상장일', 'DESC')
       .limit(options.take)
       .getMany();
+  }
+
+  getStocks(options?: FindManyOptions<Stock>) {
+    return this.stockRepository.find({
+      order: { 공모청약시작일: 'DESC' },
+      take: 30,
+      ...options,
+    });
   }
 
   async getHomePageData() {
