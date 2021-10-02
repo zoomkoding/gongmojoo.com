@@ -38,6 +38,7 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
       </h1>
       <StockListSection
         stocks={stocks.inProgress}
+        to="live"
         title="😎 청약 진행중인 공모주"
         subtitle="실시간 경쟁률을 알려드립니다!"
       />
