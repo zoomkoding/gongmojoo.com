@@ -18,7 +18,7 @@
 }
 
 @include larger-than(1100px) {
-    .divider {
+    .dividerContainer {
         background-color: white;
     }
 }
