@@ -1,17 +1,19 @@
+import HrefButton from "@/components/HrefButton";
+import Section from "@/components/Section";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
-import { getLocalTime, getMoneyNeededForOne } from "@/utils";
-import { IStock, IStockSecurity } from "@@/types";
-import classNames from "classnames";
+import { getLocalDate, getStockCurrentStatus } from "@/utils";
+import { IStock } from "@@/types";
 import { GetServerSideProps, NextPage } from "next";
 import React from "react";
 import classes from "./Details.module.scss";
 
 export interface IDetailPageProps {
   stock: IStock;
-  stockSecurities: IStockSecurity[];
 }
 
-const Detail: NextPage<IDetailPageProps> = ({ stock, stockSecurities }) => {
+const Detail: NextPage<IDetailPageProps> = ({ stock }) => {
+  const status = getStockCurrentStatus(stock);
+
   if (!stock) {
     return (
       <DefaultPageLayout>
@@ -25,73 +27,123 @@ const Detail: NextPage<IDetailPageProps> = ({ stock, stockSecurities }) => {
 
   return (
     <DefaultPageLayout
-      title={`${stock.이름} 증권사별 실시간 청약 경쟁률 - 공모주닷컴`}
-      description={`${stock.이름}의 증권사별 실시간 청약 경쟁률과 1주를 배정 받기 위해 필요한 증거금을 알려드립니다.`}
+      title={`${stock.이름} 공모주 청약일정, 공모주 분석 - 공모주닷컴`}
+      description={`${stock.이름} 청약에 필요한 공모주 청약일정, 공모주 분석, 공모가, 기관경쟁률, 의무보유확약 정보 등 다양한 정보를 제공합니다.`}
     >
       <div className={classes.liveDetailPage}>
         <div className={classes.pageContent}>
-          <div className={classes.pageName}>공모주 실시간 경쟁률</div>
-          <div className={classes.section}>
-            <div className={classes.sectionContent}>
-              <div className={classes.sectionHeader}>종목 정보</div>
-              <div className={classes.stockName}>{stock.이름}</div>
-              <div className={classes.stockDescription}>{stock.업종}</div>
-              <div className={classes.stockDetails}>
-                <div className={classes.stockInfoItem}>
-                  <div className={classes.stockInfoLabel}>확정공모가</div>
-                  <div className={classes.stockInfoValue}>
-                    {stock.확정공모가}원
-                  </div>
-                </div>
-                <div className={classes.stockInfoItem}>
-                  <div className={classes.stockInfoLabel}>기관경쟁률</div>
-                  <div className={classes.stockInfoValue}>
-                    {stock.기관경쟁률}:1
-                  </div>
-                </div>
-                <div className={classes.stockInfoItem}>
-                  <div className={classes.stockInfoLabel}>의무보유확약</div>
-                  <div className={classes.stockInfoValue}>
-                    {stock.총의무보유확약비율}%
-                  </div>
-                </div>
-              </div>
+          <div className={classes.stockInfo}>
+            <div
+              className={classes.stockStatus}
+              style={{ color: status.color }}
+            >
+              {status.value}
+            </div>
+            <div className={classes.stockName}>{stock.이름}</div>
+            <div className={classes.stockSecurities}>
+              {stock.주간사.join(", ")}
             </div>
           </div>
 
-          <div className={classes.section}>
-            <div className={classes.sectionHeader}>
-              실시간 경쟁률
-              <div className={classes.lastUpdatedTime}>
-                {getLocalTime(stockSecurities[0].updatedAt)} 기준
-              </div>
+          {status.value === "🚨 청약진행중" && (
+            <div className={classes.liveButton}>
+              <HrefButton
+                href={`/live/${stock.id}`}
+                buttonText="🔥 실시간 경쟁률 보러가기"
+              />
             </div>
+          )}
 
-            <div className={classes.securityInfoItems}>
-              <div
-                className={classNames([
-                  classes.securityInfoItem,
-                  classes.tableHeader,
-                ])}
-              >
-                <div className={classes.securityName}>증권사</div>
-                <div className={classes.rate}>비례경쟁률</div>
-                <div className={classes.rate}>1주당필요증거금</div>
+          <Section title="🧞‍♂️ 공모 정보">
+            <div className={classes.roundedContainer}>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>종목업종</div>
+                <div className={classes.stockInfoValue}>{stock.업종}</div>
               </div>
-              {stockSecurities.map((security) => (
-                <div className={classes.securityInfoItem} key={security.id}>
-                  <div className={classes.securityName}>
-                    {security.증권사이름}
-                  </div>
-                  <div className={classes.rate}>{security.비례경쟁률}:1</div>
-                  <div className={classes.rate}>
-                    {getMoneyNeededForOne(stock, security)}원
-                  </div>
-                  {/* <div className={classes.rate}>{item.총청약건수}</div> */}
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>희망공모가</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.희망공모가상단 === stock.희망공모가하단
+                    ? `${stock.희망공모가하단}원`
+                    : `${stock.희망공모가하단}원 ~ ${stock.희망공모가상단}원`}
                 </div>
-              ))}
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>확정공모가</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.확정공모가 ? `${stock.확정공모가}원` : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>기관경쟁률</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.기관경쟁률 ? `${stock.기관경쟁률}:1` : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>총의무보유확약</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.총의무보유확약비율
+                    ? `${stock.총의무보유확약비율}%`
+                    : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>증거금비율</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.증거금비율 ? `${stock.증거금비율}%` : "-"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>상장일종가</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.상장일종가 ? `${stock.상장일종가}원` : "-"}
+                </div>
+              </div>
             </div>
-          </div>
+          </Section>
+          <Section title="🗓 공모 일정">
+            <div className={classes.roundedContainer}>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>수요예측일</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.수요예측시작일
+                    ? `${getLocalDate(stock.수요예측시작일)} ~ ${getLocalDate(
+                        stock.수요예측종료일
+                      )}`
+                    : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>공모청약일</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.공모청약시작일
+                    ? `${getLocalDate(stock.공모청약시작일)} ~ ${getLocalDate(
+                        stock.공모청약종료일
+                      )}`
+                    : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>배정공고일</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.배정공고일 ? getLocalDate(stock.배정공고일) : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>환불일</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.배정공고일 ? getLocalDate(stock.배정공고일) : "미정"}
+                </div>
+              </div>
+              <div className={classes.stockInfoItem}>
+                <div className={classes.stockInfoLabel}>상장일</div>
+                <div className={classes.stockInfoValue}>
+                  {stock.상장일 ? getLocalDate(stock.상장일) : "미정"}
+                </div>
+              </div>
+            </div>
+          </Section>
         </div>
       </div>
     </DefaultPageLayout>
