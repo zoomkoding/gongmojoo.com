@@ -34,8 +34,8 @@ function PageHeader() {
             </Link>
           </div> */}
           <div className={classes.menu}>
-            <Link href="/live" passHref>
-              <a>진행중인 공모주</a>
+            <Link href="/list" passHref>
+              <a>공모주 전체 보기</a>
             </Link>
           </div>
           {/* <div className={classes.menu}>
