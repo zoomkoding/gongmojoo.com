@@ -8,7 +8,7 @@ export function numberWithCommas(x: number) {
 export function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
   if (!stock.확정공모가) return null;
   const 공모가기준증거금 = stock.확정공모가 * stock.증거금비율 * 0.01;
-  return numberWithCommas(공모가기준증거금 * security.비례경쟁률);
+  return numberWithCommas(공모가기준증거금 * security.일반경쟁률 * 2);
 }
 
 export function getLocalDate(x?: string, version?: "simple" | "normal") {
@@ -57,24 +57,21 @@ export function getDateDiff(from?: Date | string, to?: Date | string) {
 }
 
 export function getStockCurrentStatus(stock: IStock) {
-  const 청약시작일차이 = getDateDiff(stock.공모청약시작일, new Date());
-  if (!청약시작일차이 || 청약시작일차이 >= 0) {
+  if (dayjs(stock.공모청약시작일).isAfter(dayjs(new Date()))) {
     return {
       color: "black",
       value: "🎯 청약예정",
     };
   }
 
-  const 청약종료일 = getDateDiff(stock.공모청약종료일, new Date());
-  if (!청약종료일 || 청약종료일 >= 0) {
+  if (dayjs(stock.공모청약종료일).isAfter(dayjs(new Date()))) {
     return {
       color: "black",
       value: "🚨 청약진행중",
     };
   }
 
-  const 상장일차이 = getDateDiff(stock.상장일, new Date());
-  if (!상장일차이 || 상장일차이 >= 0) {
+  if (dayjs(stock.상장일).isAfter(dayjs(new Date()))) {
     return {
       color: "black",
       value: "🐣 상장예정",

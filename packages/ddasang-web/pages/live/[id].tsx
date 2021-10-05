@@ -122,7 +122,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({
                       </div>
                       <div className={classes.rate}>
                         {security.일반경쟁률 && security.일반비례물량
-                          ? `${security.비례경쟁률}:1`
+                          ? `${security.일반경쟁률 * 2}:1`
                           : "-"}
                       </div>
                       <div className={classes.rate}>
