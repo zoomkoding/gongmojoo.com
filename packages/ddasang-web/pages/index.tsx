@@ -6,7 +6,6 @@ import VerticalStockListSection from "@/components/VerticalStockListSection";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import { getDateDiff } from "@/utils";
 import { IStock } from "@@/types";
-import dayjs from "dayjs";
 import type { GetServerSideProps, NextPage } from "next";
 import React, { useMemo } from "react";
 import classes from "./index.module.scss";
@@ -36,7 +35,6 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
           <strong className={classes.siteName}>공모주닷컴</strong>에서
           준비하세요!
         </div>
-        <div>{dayjs().format("MM/DD HH:mm:ss")}</div>
       </h1>
       <StockListSection
         stocks={stocks.inProgress}
