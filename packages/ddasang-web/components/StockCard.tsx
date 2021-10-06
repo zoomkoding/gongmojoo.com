@@ -21,7 +21,6 @@ function StockCard({ stock, to = "details" }: IStockCardProps) {
     [stock.공모청약시작일]
   );
 
-  console.log(dateDiff);
   return (
     <Link href={`/${to}/${stock.id}`} passHref>
       <div className={classes.stockCard}>
