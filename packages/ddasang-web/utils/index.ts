@@ -12,6 +12,8 @@ export function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
 }
 
 export function getLocalDate(x?: string, version?: "simple" | "normal") {
+  console.log(x);
+  console.log(dayjs(x).tz("Asia/Seoul").format("M/D"));
   if (!x) return;
   if (version === "simple") return dayjs(x).format("M/D");
   return dayjs(x).format("M월 D일");
