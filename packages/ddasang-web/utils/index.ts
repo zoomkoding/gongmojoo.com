@@ -8,7 +8,9 @@ export function numberWithCommas(x: number) {
 export function getMoneyNeededForOne(stock: IStock, security: IStockSecurity) {
   if (!stock.확정공모가) return null;
   const 공모가기준증거금 = stock.확정공모가 * stock.증거금비율 * 0.01;
-  return numberWithCommas(공모가기준증거금 * security.일반경쟁률 * 2);
+  return numberWithCommas(
+    Math.floor(공모가기준증거금 * security.일반경쟁률 * 2)
+  );
 }
 
 export function getLocalDate(x?: string, version?: "simple" | "normal") {
