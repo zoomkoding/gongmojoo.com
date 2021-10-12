@@ -3,12 +3,13 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { flatten, uniq } from 'lodash';
 import { InjectRepository } from '@nestjs/typeorm';
+import { flatten, uniq } from 'lodash';
 import { FindManyOptions, getConnection, In, Raw, Repository } from 'typeorm';
-import { StockSecurity } from './entity/stock-security.entity';
-import { Stock } from './entity/stock.entity';
 import { Security } from './entity/security.entity';
+import { StockSecurity } from './entity/stock-security.entity';
+import { StockVideo } from './entity/stock-video.entity';
+import { Stock } from './entity/stock.entity';
 
 @Injectable()
 export class GongmoService {
@@ -17,6 +18,9 @@ export class GongmoService {
 
   @InjectRepository(StockSecurity)
   private stockSecurityRepository: Repository<StockSecurity>;
+
+  @InjectRepository(StockVideo)
+  private stockVideoRepository: Repository<StockVideo>;
 
   @InjectRepository(Security)
   private securityRepository: Repository<Security>;
@@ -27,7 +31,10 @@ export class GongmoService {
     const stockSecurities = await this.stockSecurityRepository.find({
       공모주이름: stock.이름,
     });
-    return { stock, stockSecurities };
+    const stockVideos = await this.stockVideoRepository.find({
+      공모주이름: stock.이름,
+    });
+    return { stock, stockSecurities, stockVideos };
   }
 
   async getPreparePageData() {
