@@ -10,6 +10,8 @@
 
 @include larger-than(700px) {
     .stockCards {
-        gap: 25px;
+        display: grid;
+        column-gap: 25px;
+        grid-template-columns: repeat(2, 1fr)
     }
 }
