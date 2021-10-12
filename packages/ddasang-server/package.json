@@ -10,7 +10,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "TZ=Asia/Seoul nest start",
-    "dev": "nest start mandao-nest-server --watch",
+    "dev": "TZ=Asia/Seoul nest start --watch",
     "start:dev": "TZ=Asia/Seoul nest start --watch",
     "start:debug": "TZ=Asia/Seoul nest start --debug --watch",
     "start:prod": "TZ=Asia/Seoul node dist/main",
