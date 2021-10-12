@@ -1,0 +1,30 @@
+@use '@/styles/mixins'as *;
+
+.section {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    @include horizontal-padding;
+    padding-top: 10px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.video {
+    width: 100%;
+    height: 200px;
+}
+
+@include larger-than(700px) {
+    .video {
+        width: 527px;
+        height: 310px;
+    }
+}

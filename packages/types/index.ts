@@ -46,3 +46,8 @@ export interface IStockSecurity {
   updatedAt: string;
   createdAt: string;
 }
+
+export interface IVideo {
+  id: number;
+  videoId: string;
+}

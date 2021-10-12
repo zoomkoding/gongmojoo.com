@@ -3,6 +3,7 @@ import HrefButton from "@/components/HrefButton";
 import Section from "@/components/Section";
 import StockListSection from "@/components/StockListSection";
 import VerticalStockListSection from "@/components/VerticalStockListSection";
+import VerticalYouTubeListSection from "@/components/VerticalYoutubeListSection";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
 import { getDateDiff } from "@/utils";
 import { IStock } from "@@/types";
@@ -36,6 +37,14 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
           준비하세요!
         </div>
       </h1>
+      <VerticalYouTubeListSection
+        videos={[
+          {
+            id: 1,
+            videoId: "Mky-BFQQtnM",
+          },
+        ]}
+      />
       <StockListSection
         stocks={stocks.inProgress}
         to="live"
