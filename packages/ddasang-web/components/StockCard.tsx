@@ -1,5 +1,6 @@
 import { IStock } from "@/../types";
 import { getDateDiff, getLocalDate } from "@/utils";
+import { isNumber } from "lodash";
 import Link from "next/link";
 import React, { useMemo } from "react";
 import classes from "./StockCard.module.scss";
@@ -27,7 +28,7 @@ function StockCard({ stock, to = "details" }: IStockCardProps) {
         <div className={classes.info}>
           <div className={classes.name}>{stock.이름}</div>
           <div className={classes.securities}>{stock.주간사.join(", ")}</div>
-          {stock.기관경쟁률 && stock.총의무보유확약비율 && (
+          {isNumber(stock.기관경쟁률) && isNumber(stock.총의무보유확약비율) && (
             <div className={classes.details}>
               기관경쟁률 {stock.기관경쟁률.toFixed(0)}:1 의무보유비율{" "}
               {stock.총의무보유확약비율}%
