@@ -22,6 +22,18 @@ function StockCard({ stock, to = "details" }: IStockCardProps) {
     [stock.공모청약시작일]
   );
 
+  const dDayStatus = useMemo(() => {
+    if (!dateDiff || dateDiff === 0 || dateDiff === 1) return "진행중";
+    return `D${dateDiff > 0 ? "+" : ""}${dateDiff}`;
+  }, [dateDiff]);
+
+  const date = useMemo(() => {
+    if (dDayStatus === "진행중") {
+      return `~${getLocalDate(stock.공모청약종료일, "simple")}`;
+    }
+    return getLocalDate(stock.공모청약시작일, "simple");
+  }, [dDayStatus, stock]);
+
   return (
     <Link href={`/${to}/${stock.id}`} passHref>
       <div className={classes.stockCard}>
@@ -35,23 +47,10 @@ function StockCard({ stock, to = "details" }: IStockCardProps) {
             </div>
           )}
         </div>
-        {dateDiff ? (
-          <div className={classes.date}>
-            <div className={classes.dateDiff}>{`D${
-              dateDiff > 0 ? "+" : ""
-            }${dateDiff}`}</div>
-            <div className={classes.startingDate}>
-              {getLocalDate(stock.공모청약시작일, "simple")}
-            </div>
-          </div>
-        ) : (
-          <div className={classes.date}>
-            <div className={classes.dateDiff}>진행중</div>
-            <div className={classes.startingDate}>
-              {`~${getLocalDate(stock.공모청약종료일, "simple")}`}
-            </div>
-          </div>
-        )}
+        <div className={classes.date}>
+          <div className={classes.dateDiff}>{dDayStatus}</div>
+          <div className={classes.startingDate}>{date}</div>
+        </div>
       </div>
     </Link>
   );
