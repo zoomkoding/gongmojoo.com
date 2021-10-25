@@ -1,16 +1,21 @@
 import classNames from "classnames";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import classes from "./PageHeader.module.scss";
 
 function PageHeader() {
   //🚀🔺🧨💸💥🤑
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
+  const [menuIsOpened, setMenuIsOpened] = useState(false);
+
+  const toggleMenuModal = useCallback(() => {
+    setMenuIsOpened((value) => !value);
+  }, []);
+
   return (
     <header
       className={classNames({
         [classes.header]: true,
-        [classes.showMenus]: isMenuOpened,
+        [classes.showMenus]: menuIsOpened,
       })}
     >
       <div className={classes.headerContent}>
@@ -18,12 +23,9 @@ function PageHeader() {
           <div className={classes.logo}>공모주닷컴</div>
         </Link>
 
-        <div
-          className={classes.showMenuButton}
-          onClick={() => setIsMenuOpened((value) => !value)}
-        >
+        <div className={classes.showMenuButton} onClick={toggleMenuModal}>
           <i className="framework7-icons">
-            {isMenuOpened ? "multiply" : "bars"}
+            {menuIsOpened ? "multiply" : "bars"}
           </i>
         </div>
 
@@ -35,7 +37,7 @@ function PageHeader() {
           </div> */}
           <div className={classes.menu}>
             <Link href="/list" passHref>
-              <a>공모주 전체 보기</a>
+              공모주 전체 보기
             </Link>
           </div>
           {/* <div className={classes.menu}>
@@ -45,11 +47,8 @@ function PageHeader() {
           </div> */}
           <div className={classes.menu}>
             <Link href="/prepare" passHref>
-              <a>계좌 준비하기</a>
+              계좌 준비하기
             </Link>
-          </div>
-          <div className={classes.menu}>
-            <a>피드백 남기기</a>
           </div>
         </div>
       </div>
