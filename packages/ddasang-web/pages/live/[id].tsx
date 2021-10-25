@@ -108,7 +108,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({
                   >
                     <div className={classes.securityName}>증권사</div>
                     <div className={classes.rate}>일반경쟁률</div>
-                    <div className={classes.rate}>균등경쟁률</div>
+                    <div className={classes.rate}>균등배정주</div>
                   </div>
                   {stockSecurities.map((security) => (
                     <div className={classes.securityInfoItem} key={security.id}>
