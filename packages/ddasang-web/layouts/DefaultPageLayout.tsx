@@ -23,7 +23,7 @@ function DefaultPageLayout({
         />
         <meta
           name="naver-site-verification"
-          content="2c6fed5ef526d9f24df3612f630251ef56e9a1fd"
+          content="86b00ee4834e9c3a8bfe31188e58024b6d31aff9"
         />
 
         <script
