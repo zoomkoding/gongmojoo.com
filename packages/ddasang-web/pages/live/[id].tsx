@@ -1,11 +1,6 @@
 import Section from "@/components/Section";
 import DefaultPageLayout from "@/layouts/DefaultPageLayout";
-import {
-  getLocalDate,
-  getLocalTime,
-  getMoneyNeededForOne,
-  getStockCurrentStatus,
-} from "@/utils";
+import { getLocalDate, getLocalTime, getStockCurrentStatus } from "@/utils";
 import { IStock, IStockSecurity } from "@@/types";
 import classNames from "classnames";
 import { GetServerSideProps, NextPage } from "next";
@@ -112,8 +107,8 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({
                     ])}
                   >
                     <div className={classes.securityName}>증권사</div>
-                    <div className={classes.rate}>비례경쟁률</div>
-                    <div className={classes.rate}>1주당필요증거금</div>
+                    <div className={classes.rate}>일반경쟁률</div>
+                    <div className={classes.rate}>균등경쟁률</div>
                   </div>
                   {stockSecurities.map((security) => (
                     <div className={classes.securityInfoItem} key={security.id}>
@@ -121,13 +116,15 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({
                         {security.증권사이름}
                       </div>
                       <div className={classes.rate}>
-                        {security.일반경쟁률 && security.일반비례물량
-                          ? `${security.일반경쟁률 * 2}:1`
+                        {security.일반경쟁률
+                          ? `${security.일반경쟁률.toFixed(2)}:1`
                           : "-"}
                       </div>
                       <div className={classes.rate}>
-                        {security.일반경쟁률 && security.일반비례물량
-                          ? getMoneyNeededForOne(stock, security) + "원"
+                        {security.총청약건수
+                          ? `${(
+                              security.일반균등물량 / security.총청약건수
+                            ).toFixed(2)}`
                           : "-"}
                       </div>
                       {/* <div className={classes.rate}>{item.총청약건수}</div> */}
