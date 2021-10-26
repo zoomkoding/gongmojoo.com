@@ -107,7 +107,7 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({
                     ])}
                   >
                     <div className={classes.securityName}>증권사</div>
-                    <div className={classes.rate}>일반경쟁률</div>
+                    <div className={classes.rate}>비례경쟁률</div>
                     <div className={classes.rate}>균등배정주</div>
                   </div>
                   {stockSecurities.map((security) => (
@@ -116,8 +116,8 @@ const LiveDetail: NextPage<ILiveDetailPageProps> = ({
                         {security.증권사이름}
                       </div>
                       <div className={classes.rate}>
-                        {security.일반경쟁률
-                          ? `${security.일반경쟁률.toFixed(2)}:1`
+                        {security.비례경쟁률
+                          ? `${security.비례경쟁률.toFixed(2)}:1`
                           : "-"}
                       </div>
                       <div className={classes.rate}>
