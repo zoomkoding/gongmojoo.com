@@ -5,7 +5,8 @@
   "description": "ddasang monorepo",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\""
+    "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\"",
+    "version": "lerna version --yes"
   },
   "repository": {
     "type": "git",
