@@ -1,12 +1,12 @@
 {
   "private": true,
-  "name": "ddasang",
-  "version": "0.1.0",
-  "description": "ddasang monorepo",
+  "name": "gongmojoo.com",
+  "description": "gongmojoo.com monorepo",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\"",
-    "version": "lerna version --yes"
+    "version": "lerna version --yes",
+    "install": "lerna bootstrap"
   },
   "repository": {
     "type": "git",
