@@ -4,7 +4,6 @@
   "description": "gongmojoo.com monorepo",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\"",
     "version": "lerna version --yes",
     "install": "lerna bootstrap"
   },
