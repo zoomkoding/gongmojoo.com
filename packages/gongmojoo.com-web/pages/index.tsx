@@ -52,6 +52,16 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
         subtitle="실시간 경쟁률을 알려드립니다!"
       />
       <Divider hide={stocks.inProgress.length === 0} />
+      <StockListSection
+        stocks={stocks.upcoming.filter(
+          (stock) => getDateDiff(stock.공모청약시작일, new Date()) === 1
+        )}
+        title="🚀 내일 청약 시작!"
+        subtitle="원하는 종목에 필요한 계좌가 없으다면 지금 개설하세요!"
+      />
+      <Divider hide={tomorrowStock.length === 0} />
+      <VerticalStockListSection stocks={stocks.finished} />
+      <Divider />
       <Section
         title="🤔 계좌는 잘 준비하셨나요?"
         subtitle="다가오는 공모주에 필요한 증권 계좌를 잘 준비할 수 있도록!"
@@ -63,17 +73,6 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
           />
         </div>
       </Section>
-      <Divider />
-      <StockListSection
-        stocks={stocks.upcoming.filter(
-          (stock) => getDateDiff(stock.공모청약시작일, new Date()) === 1
-        )}
-        title="🚀 내일 청약 시작!"
-        subtitle="원하는 종목에 필요한 계좌가 없으다면 지금 개설하세요!"
-      />
-      <Divider hide={tomorrowStock.length === 0} />
-
-      <VerticalStockListSection stocks={stocks.finished} />
       <Divider />
       <StockListSection
         stocks={stocks.upcoming.filter((stock) => stock)}

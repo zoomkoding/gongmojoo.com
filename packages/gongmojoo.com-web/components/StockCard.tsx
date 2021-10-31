@@ -28,7 +28,7 @@ function StockCard({ stock, to = "details" }: IStockCardProps) {
   }, [dateDiff]);
 
   const date = useMemo(() => {
-    if (dDayStatus === "진행중") {
+    if (dDayStatus === "오늘") {
       return `~${getLocalDate(stock.공모청약종료일, "simple")}`;
     }
     return getLocalDate(stock.공모청약시작일, "simple");
