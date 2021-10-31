@@ -24,19 +24,16 @@
 
 }
 
-.logo {
+.logoContainer {
     display: flex;
     align-items: center;
     margin-left: 4px;
     font-size: 20px;
     font-weight: 600;
+    gap: 4px;
     cursor: pointer;
 }
 
-.icon {
-    margin-right: 5px;
-    font-size: 25px;
-}
 
 .description {
     color: #4e5968;

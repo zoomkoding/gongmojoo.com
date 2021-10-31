@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Link from "next/link";
+import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import classes from "./PageHeader.module.scss";
 
@@ -20,7 +21,10 @@ function PageHeader() {
     >
       <div className={classes.headerContent}>
         <Link href="/" passHref>
-          <div className={classes.logo}>공모주닷컴</div>
+          <div className={classes.logoContainer}>
+            <Image src="/logo.png" alt="logo" width={20} height={20} />
+            <div className={classes.logoText}>공모주닷컴</div>
+          </div>
         </Link>
 
         <div className={classes.showMenuButton} onClick={toggleMenuModal}>
