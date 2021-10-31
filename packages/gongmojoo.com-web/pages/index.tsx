@@ -31,7 +31,7 @@ const Home: NextPage<IHomePageProps> = ({ stocks }) => {
   return (
     <DefaultPageLayout>
       <h1 className={classes.introduction}>
-        <div>🔥 요즘 핫한 공모주 청약,</div>
+        <div>요즘 핫한 공모주 청약 🔥</div>
         <div>
           <strong className={classes.siteName}>공모주닷컴</strong>에서
           준비하세요!
