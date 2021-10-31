@@ -23,7 +23,7 @@ function StockCard({ stock, to = "details" }: IStockCardProps) {
   );
 
   const dDayStatus = useMemo(() => {
-    if (!dateDiff || dateDiff === 0 || dateDiff === 1) return "진행중";
+    if (!dateDiff || dateDiff === 0 || dateDiff === 1) return "오늘 청약!";
     return `D${dateDiff > 0 ? "+" : ""}${dateDiff}`;
   }, [dateDiff]);
 
