@@ -66,7 +66,7 @@ export class GongmoService {
     return this.stockRepository.find({
       where: {
         공모청약시작일: Raw((alias) => `${alias} <= NOW()`),
-        공모청약종료일: Raw((alias) => `NOW() <= ${alias}`),
+        공모청약종료일: Raw((alias) => `CAST(NOW() AS DATE) <= ${alias}`),
       },
       order: { 공모청약시작일: 'DESC' },
       take: options?.take,
